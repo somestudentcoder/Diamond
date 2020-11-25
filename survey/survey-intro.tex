@@ -3,7 +3,7 @@
 \label{chap:Intro}
 
 
-
+\TODO{Intro Text}
 An academic survey paper presents a survey or overview of the state of
 the art in a particular field. Every chapter and every section should
 have some introductory text at the beginning, like this text. Never
@@ -17,6 +17,129 @@ paragraphs of introductory text.
 
 \section{Card Sorting}
 
-\section{Tools}
+\section{Tools} This chapter lists the tools in the card sorting field
+that were reviewed in the process of this survey. These tools can be
+further grouped by their functionalities. One tool, kardSort, is only
+intended for the card sorting and offers no analytics at all. Some
+other tools are only able to analyze previous card sort experiments,
+but offer no sorting capabilities. Finally the remaining tools offer
+both sorting and analytic capabilities. An overview can be seen in
+Table~\ref{tab:reviewed-tools}.
 
-\section{Review Process}
+\begin{table}[bp]
+\centering
+\begin{tabularx}
+{\linewidth}{|X|X|X|}
+\hline \textbf{Card Sorting} & \textbf{Analytics} & \textbf{Both}\\ 
+\hline kardSort & SynCaps v3 & UXtweak \\ 
+\hline & Casolysis & ProvenByUsers \\
+\hline & CSA & xSort \\
+\hline & & OptimalSort \\
+\hline
+\end{tabularx} 
+\caption[Reviewed Tools] 
+{ 
+This table summarizes all the tools that were reviewed and categorizes
+them by functionality.
+}
+\label{tab:reviewed-tools}
+\end{table}
+
+More tools were previewed before coming to a decision as to which
+tools will be in the final survey. There were tools we were not able
+to review as they are no longer available or have been acquired by
+competitors. One tool, ~\textcite{UserZoom}, offers no free version
+and did not answer to our inquiry for a review version. We listed all
+tools that we looked at but did not review below:
+
+\begin{itemize}
+    \item ~\parencite{SortIt} (not buildable)
+    \item ~\parencite{UserZoom} (did not respond to inquiry)
+    \item UsabilityTools UXSuite (acquired by competitor)
+    \item ~\parencite{SimpleCardSort} (discontinued)
+    \item ~\parencite{usabiliTest} (acquired by competitor)
+    \item ConceptCodify (acquired by competitor)
+\end{itemize}
+
+
+\section{Review Process} The reviewing of tools was done in parallel
+by three different  reviewers. In order to ensure streamlined reviews
+and produce comparable results a review process was defined. Each
+reviewer had to perform the same tasks and check for certain
+pre-defined features. These features are listed below:
+
+\begin{itemize}
+    \item Participant limit
+    \item Card limit
+    \item Business model
+    \item Availability of documentation
+    \item Support for sub-categories
+    \item Possibility for questionnaires
+    \item Import data capabilities
+    \item Export data capabilities
+    \item User session playbacks
+    \item Data preparation capabilities
+    \item Types of analytical visualizations
+\end{itemize}
+
+Once a review had taken place. It was discussed
+in a meeting with the other reviewers and ratings were assigned in
+accordance with all members.
+
+Each tool was tested with 2 datasets made up of two sets of cards. One
+dataset is made up of 10 animals and the second is a list of 55 car
+manufacturers. The cards were then used in open card sorting
+experiments by the reviewers. The datasets can be viewed in Table
+~\ref{tab:dataset-animal} and ~\ref{tab:dataset-car}.
+
+\begin{table}[bp]
+\centering
+\begin{tabularx}
+{\linewidth}{|X|X|X|X|X|}
+\hline
+Dog& Elephant  & Whale     & Lion& Mouse         \\
+\hline
+Cow       & Bear& Butterfly & Snake  & Badger    \\
+\hline
+\end{tabularx} 
+\caption[Animal Dataset] 
+{ 
+This table lists all the cards in the animal dataset.
+}
+\label{tab:dataset-animal}
+\end{table}
+
+\begin{table}[bp]
+\centering
+\begin{tabularx}
+{\linewidth}{|X|X|X|X|X|}
+\hline
+Volkswagen    & BYD      & Ford         & Infiniti    & Rimac   \\
+\hline
+Kia           & Skoda    & Cadillac     & Mitsubishi  & Jeep    \\
+\hline
+Honda         & Bugatti  & Jaguar       & Dodge       & Lincoln \\
+\hline
+Toyota        & Citroen  & Aston Martin & GMC         & Smart   \\
+\hline
+Porsche       & Hyundai  & Chrystler    & Lexus       & Tesla   \\
+\hline
+Seat          & Nissan   & Subaru       & Range Rover & Lancia  \\
+\hline
+Mazda         & Saab     & Lamborghini  & Rolls-Royce & Dacia   \\
+\hline
+BMW           & Renault  & Koenigsegg   & Volvo       & Lotus   \\
+\hline
+Audi          & Peugeot  & Alfa Romeo   & Suzuki      & Mini    \\
+\hline
+KTM           & Ferrari  & Fiat         & Bentley     & Lada    \\
+\hline
+Mercedes-Benz & Chevrolet& Maserati     & McLaren     &        \\
+\hline
+\end{tabularx} 
+\caption[Car Dataset] 
+{ 
+This table lists all the cards in the car manufacturer dataset.
+}
+\label{tab:dataset-car}
+\end{table}
