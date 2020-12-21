@@ -24,6 +24,8 @@ import { AdminComponent } from './admin/admin.component';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslationService } from './translate.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { CreateCardSortComponent } from './create-card-sort/create-card-sort.component';
+import { CardSortTestComponent } from './card-sort-test/card-sort-test.component';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent},
@@ -49,7 +51,9 @@ const appRoutes: Routes = [
     TestComponent,
     ResultsComponent,
     PietreeComponent,
-    AdminComponent
+    AdminComponent,
+    CreateCardSortComponent,
+    CardSortTestComponent
   ],
   imports: [
     HttpClientModule,
