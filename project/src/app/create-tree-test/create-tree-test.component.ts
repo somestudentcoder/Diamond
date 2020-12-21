@@ -8,9 +8,9 @@ import { UserService } from '../user.service';
 declare var $: any;
 
 @Component({
-  selector: 'app-create-test',
-  templateUrl: './create-test.component.html',
-  styleUrls: ['./create-test.component.css', '../app.component.css']
+  selector: 'app-create-tree-test',
+  templateUrl: './create-tree-test.component.html',
+  styleUrls: ['./create-tree-test.component.css', '../app.component.css']
 })
 export class CreateTestComponent implements OnInit {
   randomTestId = Math.random().toString(36).substring(2, 15);

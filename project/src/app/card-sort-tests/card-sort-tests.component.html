@@ -1,7 +1,7 @@
 <div class="container-fluid mt-50">
   <div class="col-sm-offset-1">
     <p *ngIf="!this.authService.user.study && this.authService.user.email !== 'admin'">{{ "accountnotenabled" | translate }}</p>
-    <h3 *ngIf="tests && tests.length && (this.authService.user.study || this.authService.user.email === 'admin')">{{ "TreeTest Studies" | translate }}</h3>
+    <h3 *ngIf="tests && tests.length && (this.authService.user.study || this.authService.user.email === 'admin')">{{ "CardSort Studies" | translate }}</h3>
     
     <div class="row">
       <div class="col-sm-9">
@@ -59,7 +59,7 @@
 
 
     <div *ngIf="(this.authService.user.study || this.authService.user.email === 'admin')">
-      <button style="margin-top: 30px; margin-bottom: 30px;" type="button" class="btn btn-default" routerLink="/create-tree-test">{{ "createstudy" | translate }}</button>
+      <button style="margin-top: 30px; margin-bottom: 30px;" type="button" class="btn btn-default" routerLink="/create-card-sort">{{ "create card sort" | translate }}</button>
     </div>
   </div>
 </div>

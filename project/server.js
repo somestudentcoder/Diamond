@@ -43,7 +43,7 @@ const port = 48792;
   var dbb;
 
   // Connect to the database before starting the application server.
-  mongodb.MongoClient.connect(db.database_connection_url || db.database_connection_url, { useNewUrlParser: true }, function (err, client) {
+  mongodb.MongoClient.connect(db.database_connection_url || db.database_connection_url, { useNewUrlParser: true, useUnifiedTopology: true }, function (err, client) {
     if (err) {
       console.log(err);
       process.exit(1);
