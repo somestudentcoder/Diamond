@@ -15,7 +15,7 @@ import { RegisterComponent } from './register/register.component';
 import { AuthenticationService } from './authentification.service';
 import { AlertService } from './alert.service';
 import { UserService } from './user.service';
-import { CreateTestComponent } from './create-test/create-test.component';
+import { CreateTestComponent } from './create-tree-test/create-tree-test.component';
 import { TestComponent } from './test/test.component';
 import { ResultsComponent } from './results/results.component';
 import { PietreeComponent } from './pietree/pietree.component';
@@ -27,8 +27,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent},
-  { path: 'create-test', component: CreateTestComponent},
-  { path: 'create-test/:id', component: CreateTestComponent},
+  { path: 'create-tree-test', component: CreateTestComponent},
+  { path: 'create-tree-test/:id', component: CreateTestComponent},
   { path: 'test/:id', component: TestComponent},
   { path: 'results/:id', component: ResultsComponent},
   { path: 'login', component: LoginComponent },

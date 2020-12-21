@@ -7,7 +7,7 @@ const database_connection_url = "mongodb://localhost:27017/node-mongo-registrati
 
 const config = require('../config.json');
 const mongoose = require('mongoose');
-mongoose.connect(database_connection_url || database_connection_url, { useCreateIndex: true, useNewUrlParser: true });
+mongoose.connect(database_connection_url || database_connection_url, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.Promise = global.Promise;
 
 module.exports = {

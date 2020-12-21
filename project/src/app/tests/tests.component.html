@@ -26,7 +26,7 @@
                 >
                 <i (click)="copyToClipboard(t.id); myInput.select();" class="glyphicon glyphicon-copy"></i></td>
               <td class="text-center">
-                <button [routerLink]="['/create-test/' + t.id]" class="btn btn-default"><span class="glyphicon glyphicon-pencil" style="padding-right: 5px;" ></span></button>
+                <button [routerLink]="['/create-tree-test/' + t.id]" class="btn btn-default"><span class="glyphicon glyphicon-pencil" style="padding-right: 5px;" ></span></button>
               </td>
               <td class="text-center">
                   <button *ngIf="!t.launched" style="margin-left: 5px; width: 105px !important;" type="button" class="btn btn-default" (click)="launchTest(t.id)">
@@ -59,7 +59,7 @@
 
 
     <div *ngIf="(this.authService.user.study || this.authService.user.email === 'admin')">
-      <button style="margin-top: 30px; margin-bottom: 30px;" type="button" class="btn btn-default" routerLink="/create-test">{{ "createstudy" | translate }}</button>
+      <button style="margin-top: 30px; margin-bottom: 30px;" type="button" class="btn btn-default" routerLink="/create-tree-test">{{ "createstudy" | translate }}</button>
     </div>
   </div>
 </div>
