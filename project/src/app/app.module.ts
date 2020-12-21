@@ -31,7 +31,9 @@ import { CardSortTestComponent } from './card-sort-test/card-sort-test.component
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent},
   { path: 'create-tree-test', component: CreateTestComponent},
+  { path: 'create-card-sort', component: CreateCardSortComponent},
   { path: 'create-tree-test/:id', component: CreateTestComponent},
+  { path: 'create-card-sort/:id', component: CreateCardSortComponent},
   { path: 'test/:id', component: TestComponent},
   { path: 'results/:id', component: ResultsComponent},
   { path: 'login', component: LoginComponent },
