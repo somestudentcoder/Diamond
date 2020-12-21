@@ -6,7 +6,7 @@
       <ul class="nav nav-tabs mt-20">
         <li class="active"><a data-toggle="tab" href="#settings">1. {{ "settings" | translate }}</a></li>
         <li [ngClass]="{'not-allowed': !testName.length}" (click)="saveTest()"><a  [ngClass]="{'not-allowed': !testName.length}" data-toggle="tab" href="#tree">2. {{ "tree" | translate }}</a></li>
-        <li [ngClass]="{'not-allowed': !testName.length}" (click)="saveTest(); defineCorrectAnswer(0);"><a [ngClass]="{'not-allowed': !testName.length}" data-toggle="tab" href="#tasks">3. {{ "tasks" | translate }}</a></li>
+        <!--<li [ngClass]="{'not-allowed': !testName.length}" (click)="saveTest(); defineCorrectAnswer(0);"><a [ngClass]="{'not-allowed': !testName.length}" data-toggle="tab" href="#tasks">3. {{ "tasks" | translate }}</a></li>-->
         <li [ngClass]="{'not-allowed': !testName.length}" (click)="saveTest()"><a [ngClass]="{'not-allowed': !testName.length}" data-toggle="tab" href="#messages">4. {{ "messages" | translate }}</a></li>
         <li [ngClass]="{'not-allowed': !testName.length}" (click)="saveTest()"><a [ngClass]="{'not-allowed': !testName.length}" data-toggle="tab" href="#finish">5. {{ "finish" | translate }}</a></li>
       </ul>
@@ -20,7 +20,7 @@
           <p style="display: inline-block" class="mt-20">{{ "studypassword" | translate }}</p><span style="padding-left: 5px;" data-toggle="tooltip" title="Set a study password to protect your study. Users will have to enter this password before starting the tree test." class="glyphicon glyphicon-question-sign"></span>
         </div>
           <input [(ngModel)]="studyPassword" type="text">
-          <div class="mt-20">
+          <!--<div class="mt-20">
             <input type="checkbox" id="leaf-nodes" [checked]="leafNodes"
             (change)="leafNodes = !leafNodes">{{ "leafnodes" | translate }}
             <span style="padding-left: 5px;" data-toggle="tooltip" title="If this option is checked, users will be able to select  leaf nodes only in the information hierarchy tree." class="glyphicon glyphicon-question-sign"></span>
@@ -28,7 +28,7 @@
             <input type="checkbox" id="order-numbers" [checked]="orderNumbers"
             (change)="orderNumbers = !orderNumbers" /> {{ "tasknumbers" | translate }}
             <span style="padding-left: 5px;" data-toggle="tooltip" title="If this option is checked, users will see task number while doing a tree test." class="glyphicon glyphicon-question-sign"></span>
-          </div>
+          </div>-->
           <p class="mt-20">{{ "studyurl" | translate }}</p>
           <small>{{ "link" | translate }}</small>
           <div>
@@ -39,23 +39,6 @@
           <button type="button" class="btn btn-default mt-30" (click)="saveTest(true);">{{ "save" | translate }}</button>
         </div>
   
-  
-        <div id="tree" class="mt-30 tab-pane fade">
-          <p>{{ "csv" | translate }}</p>
-          <div class="color-red" *ngIf="tasks.length">
-            {{ "treecant" | translate }}
-          </div>
-          <div class="mt-10 mb-10">
-            <button [disabled]="tasks.length" type="button" class="btn btn-default mr-5" (click)="addNode()">{{ "addnode" | translate }}</button>
-            <button [disabled]="tasks.length" type="button" class="btn btn-default mr-5" (click)="renameNode()">{{ "rename" | translate }}</button>
-            <button [disabled]="tasks.length" type="button" class="btn btn-default" (click)="deleteSelectedNode()">{{ "delete" | translate }}</button>
-            <label style="font-size: 10px !important; text-transform: initial !important;" for="file" class="btn btn-default">{{ "importcsv" | translate }}</label>
-            <input style="display: none;" type="file" id="file" (change)="onFileSelect($event.target)">
-          </div>
-          <div [ngClass]="{'tree-disabled': tasks.length}" id="test-tree"></div>
-          <button type="button" class="btn btn-default mt-30" (click)="open('tasks'); saveTest();">{{ "nextstep" | translate }}</button>
-          <button type="button" class="btn btn-default mt-30" (click)="saveTest(true);">{{ "save" | translate }}</button>
-        </div>
   
   
         <div id="tasks" class="mt-30 tab-pane fade">
