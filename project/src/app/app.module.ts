@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { LoginComponent } from './login/login.component';
 import { TestsComponent } from './tests/tests.component';
+import { CardSortTestsComponent } from './card-sort-tests/card-sort-tests.component';
 import { RegisterComponent } from './register/register.component';
 
 import { AuthenticationService } from './authentification.service';
@@ -36,6 +37,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'tests', component: TestsComponent},
+  { path: 'card-sort-tests', component: CardSortTestsComponent},
   { path: 'pie-tree/:id/:index', component: PietreeComponent },
   { path: '**', redirectTo: 'login', pathMatch: 'full' }
 ];
@@ -46,6 +48,7 @@ const appRoutes: Routes = [
     NavbarComponent,
     LoginComponent,
     TestsComponent,
+    CardSortTestsComponent,
     RegisterComponent,
     CreateTestComponent,
     TestComponent,
