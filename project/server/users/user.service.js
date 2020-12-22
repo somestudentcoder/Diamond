@@ -22,6 +22,7 @@ module.exports = {
     editCardSortTest,
     deleteCardSortTest,
     getAllCardSortTests,
+    cardSortTestPassword,
 
     authenticate,
     getAll,
@@ -220,23 +221,21 @@ async function editTest(updatedTest) {
 
 }
 
-
 async function addCardSortTest(testParam) {
-    const test = new Test(testParam);
+    const test = new CardSortTest(testParam);
     // save user
     await test.save();
 }
 
 async function getAllCardSortTests(data) {
 
-    const tests = await Test.find({ "user" : data.user })
+    const tests = await CardSortTest.find({ "user" : data.user })
     return tests;
 }
 
-
 async function cardSortTestPassword(body) {
 
-    const test = await Test.find({ "id" : body.id });
+    const test = await CardSortTest.find({ "id" : body.id });
     if (test && test[0].password == body.password) {
         return test[0];
     }
@@ -245,12 +244,12 @@ async function cardSortTestPassword(body) {
 
 async function getCardSortTest(id) {
 
-    const test = await Test.find({ "id" : id });
+    const test = await CardSortTest.find({ "id" : id });
     return test;
 }
 
 async function deleteCardSortTest(testId) {
-    const test = await Test.find({ "_id" : testId });
+    const test = await CardSortTest.find({ "_id" : testId });
     await test[0].delete();
     return 1;
 }
