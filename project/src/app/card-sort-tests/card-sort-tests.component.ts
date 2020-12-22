@@ -153,7 +153,7 @@ export class CardSortTestsComponent implements OnInit {
     return this.http.post(this.userService.serverUrl + '/users/card-sort-test/delete', {id: this.deleteCardSortTestId}, httpOptions);
   }
 
-  editTest(data) {
+  editCardSortTest(data) {
     const header = new Headers({ Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token});
     const httpOptions = {
         headers: new HttpHeaders({
