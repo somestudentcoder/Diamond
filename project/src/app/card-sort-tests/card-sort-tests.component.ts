@@ -15,8 +15,8 @@ declare var $: any;
   styleUrls: ['./card-sort-tests.component.css', '../app.component.css']
 })
 export class CardSortTestsComponent implements OnInit {
-  tests;
-  deleteTestId;
+  cardSortTests;
+  deleteCardSortTestId;
   baseurl = "";
 
   constructor(private http: HttpClient, private userService: UserService, public authService: AuthenticationService, private router: Router) { }
@@ -24,17 +24,17 @@ export class CardSortTestsComponent implements OnInit {
   ngOnInit() {
     $('[data-toggle="tooltip"]').tooltip();
     this.baseurl = location.origin;
-    this.getAllTests();  
+    this.getAllCardSortTests();
   }
 
-  getAllTests() {
+  getAllCardSortTests() {
     const data = {
         user: JSON.parse(localStorage.getItem('currentUser')).email
     };
-    this.getTestData(data)
+    this.getCardSortTestData(data)
     .subscribe(
       res => {
-        this.tests = res;
+        this.cardSortTests = res;
       },
       err => {
       }
@@ -44,7 +44,7 @@ export class CardSortTestsComponent implements OnInit {
   copyToClipboard(studyId) {
 
     $('#copyboardtest').append('<textarea id="copyboard"></textarea>');
-    $('#copyboard').val(this.baseurl + "/#/test/" + studyId);
+    $('#copyboard').val(this.baseurl + "/#/card-sort-test/" + studyId);
 
     const input = document.getElementById('copyboard');
     const isiOSDevice = navigator.userAgent.match(/ipad|iphone/i);
@@ -76,7 +76,7 @@ export class CardSortTestsComponent implements OnInit {
 
   }
 
-  getTestData(object) {
+  getCardSortTestData(object) {
     const header = new Headers({ Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token});
     const httpOptions = {
         headers: new HttpHeaders({
@@ -85,24 +85,24 @@ export class CardSortTestsComponent implements OnInit {
       })
   };
   //http://localhost:48792
-    return this.http.post(this.userService.serverUrl + '/users/test/getbyuserid', object, httpOptions);
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-test/getbyuserid', object, httpOptions);
   }
 
   getLink(id) {
-    return this.baseurl + "/#/test/" + id;
+    return this.baseurl + "/#/card-sort-test/" + id;
   }
 
-  launchTest(studyId, preview?) {
+  launchCardSortTest(studyId, preview?) {
     const data = {
       id: studyId,
       launched: true
   };
-    this.editTest(data)
+    this.editCardSortTest(data)
     .subscribe(
       res => {
-        this.getAllTests();
+        this.getAllCardSortTests();
         if (preview) {
-          this.router.navigate(['test/' + studyId]);
+          this.router.navigate(['card-sort-test/' + studyId]);
         }
       },
       err => {
@@ -111,15 +111,15 @@ export class CardSortTestsComponent implements OnInit {
     );
   }
 
-  stopTest(studyId) {
+  stopCardSortTest(studyId) {
     const data = {
       id: studyId,
       launched: false
     };
-    this.editTest(data)
+    this.editCardSortTest(data)
     .subscribe(
       res => {
-        this.getAllTests();
+        this.getAllCardSortTests();
       },
       err => {
         alert('An error occured. Please try again later.');
@@ -131,7 +131,7 @@ export class CardSortTestsComponent implements OnInit {
     this.deleteStudy()
     .subscribe(
       res => {
-        this.getAllTests();
+        this.getAllCardSortTests();
         $("#myModal").modal('hide');
       },
       err => {
@@ -150,7 +150,7 @@ export class CardSortTestsComponent implements OnInit {
       })
   };
   //http://localhost:48792
-    return this.http.post(this.userService.serverUrl + '/users/test/delete', {id: this.deleteTestId}, httpOptions);
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-test/delete', {id: this.deleteCardSortTestId}, httpOptions);
   }
 
   editTest(data) {
@@ -162,7 +162,7 @@ export class CardSortTestsComponent implements OnInit {
       })
   };
   //http://localhost:48792
-    return this.http.post(this.userService.serverUrl + '/users/test/edit', data, httpOptions);
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-test/edit', data, httpOptions);
   }
 
 }

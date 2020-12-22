@@ -14,6 +14,15 @@ router.post('/test/passwordrequired', passwordRequired);
 router.post('/test/edit', editTest);
 router.post('/test/delete', deleteTest);
 router.post('/test/getbyuserid', getAllTests);
+
+router.post('/card-sort-test/add', addTest);
+router.post('/card-sort-test/get', getTest);
+router.post('/card-sort-test/password', testPassword);
+router.post('/card-sort-test/passwordrequired', passwordRequired);
+router.post('/card-sort-test/edit', editTest);
+router.post('/card-sort-test/delete', deleteTest);
+router.post('/card-sort-test/getbyuserid', getAllTests);
+
 router.post('/', getAll);
 router.get('/current', getCurrent);
 router.get('/:id', getById);
@@ -136,6 +145,39 @@ function update(req, res, next) {
 
 function _delete(req, res, next) {
     userService.delete(req.body.id)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+
+
+function addCardSortTest(req, res, next) {
+    userService.addCardSortTest(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function getCardSortTest(req, res, next) {
+    userService.getCardSortTest(req.body.id)
+        .then((test) => res.json(test[0]))
+        .catch(err => next(err));
+}
+
+
+function cardSortTestPassword(req, res, next) {
+    userService.cardSortTestPassword(req.body)
+        .then((test) => res.json(test))
+        .catch(err => next(err));
+}
+
+function editCardSortTest(req, res, next) {
+    userService.editTest(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function deleteCardSortTest(req, res, next) {
+    userService.deleteTest(req.body.id)
         .then(() => res.json({}))
         .catch(err => next(err));
 }

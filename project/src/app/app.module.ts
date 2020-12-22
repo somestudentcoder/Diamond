@@ -34,6 +34,7 @@ const appRoutes: Routes = [
   { path: 'create-card-sort', component: CreateCardSortComponent},
   { path: 'create-tree-test/:id', component: CreateTestComponent},
   { path: 'create-card-sort/:id', component: CreateCardSortComponent},
+  { path: 'card-sort-test/:id', component: CardSortTestComponent},
   { path: 'test/:id', component: TestComponent},
   { path: 'results/:id', component: ResultsComponent},
   { path: 'login', component: LoginComponent },

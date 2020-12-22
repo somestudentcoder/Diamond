@@ -387,12 +387,14 @@ export class CreateCardSortComponent implements OnInit {
       orderNumbers: this.orderNumbers
     };
 
-    if(showPopup) {
+    if (showPopup) {
       let lang = localStorage.getItem('tt-language');
-      if (lang === 'en')
+      if (lang === 'en') {
         alert("Saved!");
-      else
+      }
+      else {
         alert("Gespeichert!");
+      }
     }
     if (!this.id) { // new test
       this.postTestData(test)

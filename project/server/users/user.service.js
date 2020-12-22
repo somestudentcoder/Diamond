@@ -5,6 +5,7 @@ const db = require('../_helpers/db');
 const User = db.User;
 const Test = db.Test;
 const Result = db.Result;
+const CardSortTest = db.CardSortTest;
 
 module.exports = {
     getResultsById,
@@ -15,6 +16,13 @@ module.exports = {
     editTest,
     deleteTest,
     getAllTests,
+
+    addCardSortTest,
+    getCardSortTest,
+    editCardSortTest,
+    deleteCardSortTest,
+    getAllCardSortTests,
+
     authenticate,
     getAll,
     getById,
@@ -168,7 +176,89 @@ async function deleteIndividualResult(resultId) {
 
 async function editTest(updatedTest) {
 
-    const test = await Test.find({ "id" : updatedTest.id });
+    const test = await CardSortTest.find({ "id" : updatedTest.id });
+
+    //Object.assign(test, updatedTest);
+    if (updatedTest.name) {
+        test[0].name = updatedTest.name;
+    }
+    if (updatedTest.password) {
+        if (updatedTest.password !== "empty") {
+            test[0].password = updatedTest.password;
+        } else {
+            test[0].password = "";
+        }
+    }
+    if (updatedTest.tree) {
+        test[0].tree = updatedTest.tree;
+    }
+    if (updatedTest.tasks) {
+        test[0].tasks = updatedTest.tasks;
+    }
+    if (updatedTest.welcomeMessage) {
+        test[0].welcomeMessage = updatedTest.welcomeMessage;
+    }
+    if (updatedTest.instructions) {
+        test[0].instructions = updatedTest.instructions;
+    }
+    if (updatedTest.thankYouScreen) {
+        test[0].thankYouScreen = updatedTest.thankYouScreen;
+    }
+    if (updatedTest.leafNodes !== undefined) {
+        test[0].leafNodes = updatedTest.leafNodes;
+    }
+    if (updatedTest.orderNumbers !== undefined) {
+        test[0].orderNumbers = updatedTest.orderNumbers;
+    }
+    if (updatedTest.launched !== undefined) {
+        test[0].launched = updatedTest.launched;
+    }
+
+    await test[0].save();
+
+    return test[0];
+
+}
+
+
+async function addCardSortTest(testParam) {
+    const test = new Test(testParam);
+    // save user
+    await test.save();
+}
+
+async function getAllCardSortTests(data) {
+
+    const tests = await Test.find({ "user" : data.user })
+    return tests;
+}
+
+
+async function cardSortTestPassword(body) {
+
+    const test = await Test.find({ "id" : body.id });
+    if (test && test[0].password == body.password) {
+        return test[0];
+    }
+    return false;
+}
+
+async function getCardSortTest(id) {
+
+    const test = await Test.find({ "id" : id });
+    return test;
+}
+
+async function deleteCardSortTest(testId) {
+    const test = await Test.find({ "_id" : testId });
+    await test[0].delete();
+    return 1;
+}
+
+
+async function editCardSortTest(updatedTest) {
+
+    const test = await CardSortTest.find({ "id" : updatedTest.id });
 
     //Object.assign(test, updatedTest);
     if (updatedTest.name) {

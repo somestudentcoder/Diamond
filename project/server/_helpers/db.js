@@ -13,6 +13,7 @@ mongoose.Promise = global.Promise;
 module.exports = {
     User: require('../users/user.model'),
     Test: require('../users/test.model'),
+    CardSortTest: require('../users/card-sort-test.model'),
     Result: require('../users/result.model'),
     database_connection_url
 };
