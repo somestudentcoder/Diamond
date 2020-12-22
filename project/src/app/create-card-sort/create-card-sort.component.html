@@ -1,4 +1,5 @@
 <div class="container-fluid mt-50">
+    
     <div class="col-sm-offset-1 col-sm-10">
         <h3 *ngIf="!id">{{ "newstudy" | translate }}</h3>
         <h3 *ngIf="id">{{ "editstudy" | translate }}</h3>
@@ -39,7 +40,7 @@
                     <label style="font-size: 10px !important; text-transform: initial !important;" for="file" class="btn btn-default">{{ "importcsv" | translate }}</label>
                     <input style="display: none;" type="file" id="file" (change)="onFileSelect($event.target)">
                 </div>
-                <div id="card-creation"></div>
+                <app-card-list id="card-list"></app-card-list>
                 <button type="button" class="btn btn-default mt-30" (click)="open('messages'); saveTest();">{{ "nextstep" | translate }}</button>
                 <button type="button" class="btn btn-default mt-30" (click)="saveTest(true);">{{ "save" | translate }}</button>
             </div>

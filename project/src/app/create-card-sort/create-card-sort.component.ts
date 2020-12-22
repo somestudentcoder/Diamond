@@ -4,6 +4,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.service';
+import { CardListComponent } from '../card-list/card-list.component';
 
 declare var $: any;
 
@@ -29,7 +30,10 @@ export class CreateCardSortComponent implements OnInit {
   leafNodes = true;
   orderNumbers = true;
 
+  cardlist = [];
+
   canSave = false;
+
 
   csvContent;
   baseurl = "";
@@ -51,7 +55,7 @@ export class CreateCardSortComponent implements OnInit {
                 // tslint:disable-next-line:no-angle-bracket-type-assertion
                 this.testName = (res as any).name;
                 this.studyPassword = (res as any).password;
-                //this.createCard('card-creation', (res as any).tree);
+                this.createCardList('card-creation', (res as any).cards);
                 this.welcomeMessage = (res as any).welcomeMessage;
                 this.instructions = (res as any).instructions;
                 this.thankYouScreen = (res as any).thankYouScreen;
@@ -217,7 +221,16 @@ export class CreateCardSortComponent implements OnInit {
 
   }
 
+  createCardList(id, content)
+  {
+    if(id == 'card-creation')
+    {
+      this.addCard();
+    }
+  }
+
   addCard() {
+    
     /*
     const currentNode = $('#test-tree').jstree('get_selected');
     $('#test-tree').jstree('create_node', currentNode, {text : 'new Node'}, 'last' , function test(newNode) {
