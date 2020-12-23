@@ -1,5 +1,7 @@
-import { Component} from '@angular/core';
+import { Component, Input, Output, EventEmitter} from '@angular/core';
 import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+
+declare var $: any;
 
 @Component({
   selector: 'app-card-list',
@@ -8,17 +10,18 @@ import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 })
 export class CardListComponent{
 
-  cards = [
-    'Episode I - The Phantom Menace',
-    'Episode II - Attack of the Clones',
-    'Episode III - Revenge of the Sith',
-    'Episode IV - A New Hope',
-    'Episode V - The Empire Strikes Back',
-    'Episode VI - Return of the Jedi',
-    'Episode VII - The Force Awakens',
-    'Episode VIII - The Last Jedi',
-    'Episode IX – The Rise of Skywalker'
-  ];
+  @Input() cards: [string];
+
+  @Output() selectedEvent = new EventEmitter<string>();
+
+  selectedCard(event, name)
+  {
+    document.querySelectorAll<HTMLElement>('.card').forEach(element => {
+      element.style.background = 'white'
+    });
+    event.target.style.backgroundColor = 'lightgrey';
+    this.selectedEvent.emit(name);
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     moveItemInArray(this.cards, event.previousIndex, event.currentIndex);

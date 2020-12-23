@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -30,7 +30,9 @@ export class CreateCardSortComponent implements OnInit {
   leafNodes = true;
   orderNumbers = true;
 
-  cardlist = [];
+  cardName = "";
+  cards:string[] = [];
+  currentlySelectedCard = "";
 
   canSave = false;
 
@@ -55,7 +57,7 @@ export class CreateCardSortComponent implements OnInit {
                 // tslint:disable-next-line:no-angle-bracket-type-assertion
                 this.testName = (res as any).name;
                 this.studyPassword = (res as any).password;
-                this.createCardList('card-creation', (res as any).cards);
+                this.cardName = (res as any).name;
                 this.welcomeMessage = (res as any).welcomeMessage;
                 this.instructions = (res as any).instructions;
                 this.thankYouScreen = (res as any).thankYouScreen;
@@ -221,37 +223,36 @@ export class CreateCardSortComponent implements OnInit {
 
   }
 
-  createCardList(id, content)
+  selectCard(name: string)
   {
-    if(id == 'card-creation')
-    {
-      this.addCard();
-    }
+    this.currentlySelectedCard = name;
   }
 
   addCard() {
-    
-    /*
-    const currentNode = $('#test-tree').jstree('get_selected');
-    $('#test-tree').jstree('create_node', currentNode, {text : 'new Node'}, 'last' , function test(newNode) {
-      $('#test-tree').jstree('open_node', currentNode);
-      const inst = $.jstree.reference(newNode);
-      inst.edit(newNode);
-    });*/
+    if(this.cardName == '')
+    {
+      return;
+    }
+    else
+    {
+      this.cards.push(this.cardName);
+      this.cardName = "";
+    }
   }
 
   renameCard() {
-    /*
-    const instance = $('#test-tree').jstree(true);
-    instance.edit(instance.get_selected());
-    */
+    let index = this.cards.indexOf(this.currentlySelectedCard);
+    if (index !== -1) {
+        this.cards[index] = this.cardName;
+        this.cardName = "";
+    }
   }
 
   deleteSelectedCard() {
-    /*
-    const instance = $('#test-tree').jstree(true);
-    instance.delete_node(instance.get_selected());
-    */
+    let index = this.cards.indexOf(this.currentlySelectedCard);
+    if (index !== -1) {
+        this.cards.splice(index, 1);
+    }
   }
 
   saveTest(showPopup?) {
