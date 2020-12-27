@@ -87,12 +87,6 @@ export class CreateCardSortComponent implements OnInit {
     $('a[href="#' + link + '"]').click();
   }
 
-  getData() {
-    const v = $('#test-tree').jstree(true).get_json('#', {flat: true});
-    const mytext = JSON.stringify(v);
-    //this.createTree('test-tree2', v);
-  }
-
   onFileLoad(fileLoadedEvent) {
     const textFromFileLoaded = fileLoadedEvent.target.result;
     this.csvContent = textFromFileLoaded;
@@ -101,7 +95,7 @@ export class CreateCardSortComponent implements OnInit {
   onFileSelect(input: HTMLInputElement) {
 
     const files = input.files;
-    var content = this.csvContent;
+    //var content = this.csvContent;
     if (files && files.length) {
 
       const fileToRead = files[0];
@@ -116,106 +110,25 @@ export class CreateCardSortComponent implements OnInit {
 
       fileReader.readAsText(fileToRead, "UTF-8");
 
-      let lines = [];
-
       fileReader.onload = (e) => {
-        let spliter = ",";
+        let splitter = ",";
         let csv = fileReader.result;
-        let allTextLines = (<any>csv).split(/\r|\n|\r/);
-        let headers = allTextLines[0].split(',');
-        if (headers.length <= 1) {
-          headers = allTextLines[0].split(';');
-          spliter = ";";
+        let allCards = (<any>csv).split(splitter)
+        if (allCards.length <= 1) {
+          allCards = (<any>csv).split(';');
         }
 
-        for (let i = 0; i < allTextLines.length; i++) {
-          // split content based on comma
-          let data = allTextLines[i].split(spliter);
-          if (data.length === headers.length) {
-            let tarr = [];
-            for (let j = 0; j < headers.length; j++) {
-              tarr.push(data[j]);
+        allCards.forEach(card => {
+          if(card == "")
+          {
+            let index = allCards.indexOf(card);
+            if (index !== -1) {
+                allCards.splice(index, 1);
             }
-
-            lines.push(tarr);
-          }
-        }
-
-
-
-        var currentIndex = 0;
-        var node = {
-          id: "root",
-          text: lines[0][0].replace(/"/g,''),
-          index: 0,
-          parent: "#"
-        };
-        var currentNode = {
-          id: "",
-          text: "",
-          index: null,
-          parent: ""
-        };
-        var items = [node];
-        for (var i = 1; i < lines.length; i++) { //start from second line
-          currentIndex = 0; //current row position
-          for (var j = 0; j < lines[i].length; j++) { //go through whole line until finding item which is tabbed
-            if (lines[i][j] === '') {
-              currentIndex++;
-            } else {
-              currentNode = {
-                id: Math.random().toString(36).substring(7),
-                text: lines[i][j].replace(/"/g,''),
-                index: currentIndex,
-                parent: ""
-              };
-              for (var k = items.length - 1; k >= 0; k--) {
-                if (currentNode.text === "University") {
-                }
-                if (items[k].index === currentIndex - 1) {
-                  if (currentNode.text === "University") {
-                  }
-                  currentNode.parent = items[k].id;
-                  break;
-                }
-              }
-              items.push(currentNode);
-            }
-          }
-        }
-
-        this.itemsFinal = items;
-
-        $('#test-tree').jstree("destroy").empty();
-        //this.createTree('test-tree', []);
-
-        setTimeout(() => {
-          for (var i = 0; i < items.length; i++) {
-            $('#test-tree').jstree().create_node((<any>items[i]).parent, {
-              "id": items[i].id,
-              "text": items[i].text,
-              "parent": (<any>items[i]).parent,
-              "data": { "index": items[i].index },
-            }, "last", function() {
-            });
-          }
-        }, 300);
-
-        $('#test-tree-answer').jstree("destroy").empty();
-        //this.createTree('test-tree-answer', []);
-
-        setTimeout(() => {
-          for (var i = 0; i < items.length; i++) {
-            $('#test-tree-answer').jstree().create_node((<any>items[i]).parent, {
-              "id": items[i].id,
-              "text": items[i].text,
-              "parent": (<any>items[i]).parent,
-              "data": { "index": items[i].index },
-            }, "last", function() {
-            });
-          }
-        }, 300);
-
+          } 
+        });
+        this.cards = allCards;
+        console.log(this.cards)
       }
     }
 
