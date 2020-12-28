@@ -18,27 +18,26 @@ export class CreateCardSortComponent implements OnInit {
   testName = '';
   studyPassword = '';
 
-  currentTaskIndex = 0;
   // tslint:disable-next-line:no-string-literal
   id = this.route.snapshot.params['id'];
 
-  welcomeMessage = "Welcome to this card sorting study!";
-  instructions = "Please group the provided cards as you see fit.";
-  thankYouScreen = "Thank you for participation.";
-  leaveFeedback = "Your results are saved. You can give us your feedback (optional).";
+  welcomeMessage = 'Welcome to this card sorting study!';
+  instructions = 'Please group the provided cards as you see fit.';
+  thankYouScreen = 'Thank you for participation.';
+  leaveFeedback = 'Your results are saved. You can give us your feedback (optional).';
 
-  leafNodes = true;
-  orderNumbers = true;
+  subCategories = true;
 
-  cardName = "";
-  cards:string[] = [];
-  currentlySelectedCard = "";
+  cardName = '';
+  cards: string[] = [];
+
+  currentlySelectedCard = '';
 
   canSave = false;
 
 
   csvContent;
-  baseurl = "";
+  baseurl = '';
 
   itemsFinal;
 
@@ -57,14 +56,13 @@ export class CreateCardSortComponent implements OnInit {
                 // tslint:disable-next-line:no-angle-bracket-type-assertion
                 this.testName = (res as any).name;
                 this.studyPassword = (res as any).password;
-                this.cardName = (res as any).name;
+                this.cardName = (res as any).cardName;
                 this.welcomeMessage = (res as any).welcomeMessage;
                 this.instructions = (res as any).instructions;
                 this.thankYouScreen = (res as any).thankYouScreen;
                 this.leaveFeedback = (res as any).leaveFeedback;
-                if ((res as any).leafNodes !== undefined) {
-                  this.leafNodes = (res as any).leafNodes;
-                  this.orderNumbers = (res as any).orderNumbers;
+                if ((res as any).subCategories !== undefined) {
+                  this.subCategories = (res as any).subCategories;
                 }
               },
               err => {
@@ -75,15 +73,15 @@ export class CreateCardSortComponent implements OnInit {
       // this.testName = t
     } else {
       const arrayCollection = [
-        {id: 'root', parent: '#', text: 'Root', 'state' : {
-            'selected' : true
-          },}
+        {id: 'root', parent: '#', text: 'Root', state : {
+            selected : true
+          }, }
       ];
-      //this.createTree('test-tree', arrayCollection);
+      // this.createTree('test-tree', arrayCollection);
     }
   }
 
-  open(link) {;
+  open(link) {
     $('a[href="#' + link + '"]').click();
   }
 
@@ -95,44 +93,44 @@ export class CreateCardSortComponent implements OnInit {
   onFileSelect(input: HTMLInputElement) {
 
     const files = input.files;
-    //var content = this.csvContent;
+    // var content = this.csvContent;
     if (files && files.length) {
 
       const fileToRead = files[0];
-      let extension = fileToRead.name.split(".");
-      if (extension[extension.length -1] !== "csv") {
-        alert("File extension is wrong! Please provide .csv file.");
+      const extension = fileToRead.name.split('.');
+      if (extension[extension.length - 1] !== 'csv') {
+        alert('File extension is wrong! Please provide .csv file.');
         return;
       }
 
       const fileReader = new FileReader();
       fileReader.onload = this.onFileLoad;
 
-      fileReader.readAsText(fileToRead, "UTF-8");
+      fileReader.readAsText(fileToRead, 'UTF-8');
 
       fileReader.onload = (e) => {
-        let splitter = ",";
-        let csv = fileReader.result;
-        let allCards = (<any>csv).split(splitter)
+        const splitter = ',';
+        const csv = fileReader.result;
+        let allCards = (csv as any).split(splitter);
         if (allCards.length <= 1) {
-          allCards = (<any>csv).split(';');
+          allCards = (csv as any).split(';');
         }
 
         allCards.forEach(card => {
-          if(card == "")
+          if (card == '')
           {
-            let index = allCards.indexOf(card);
+            const index = allCards.indexOf(card);
             if (index !== -1) {
                 allCards.splice(index, 1);
             }
-          } 
+          }
         });
         this.cards = allCards;
-        console.log(this.cards)
-      }
+        console.log(this.cards);
+      };
     }
 
-    (<any>document).getElementById("file").value = "";
+    (document as any).getElementById('file').value = '';
 
   }
 
@@ -142,36 +140,36 @@ export class CreateCardSortComponent implements OnInit {
   }
 
   addCard() {
-    if(this.cardName == '')
+    if (this.cardName === '')
     {
       return;
     }
     else
     {
       this.cards.push(this.cardName);
-      this.cardName = "";
+      this.cardName = '';
     }
   }
 
   renameCard() {
-    let index = this.cards.indexOf(this.currentlySelectedCard);
+    const index = this.cards.indexOf(this.currentlySelectedCard);
     if (index !== -1) {
         this.cards[index] = this.cardName;
-        this.cardName = "";
+        this.cardName = '';
     }
   }
 
   deleteSelectedCard() {
-    let index = this.cards.indexOf(this.currentlySelectedCard);
+    const index = this.cards.indexOf(this.currentlySelectedCard);
     if (index !== -1) {
         this.cards.splice(index, 1);
     }
   }
 
   saveTest(showPopup?) {
-    let passTmp = "";
-    if (this.studyPassword === "") {
-      passTmp = "empty";
+    let passTmp = '';
+    if (this.studyPassword === '') {
+      passTmp = 'empty';
     } else {
       passTmp = this.studyPassword;
     }
@@ -179,22 +177,23 @@ export class CreateCardSortComponent implements OnInit {
       name: this.testName,
       launched: false,
       password: passTmp,
+      cards: this.cards,
       id: this.randomTestId,
       user: JSON.parse(localStorage.getItem('currentUser')).email,
       welcomeMessage: this.welcomeMessage,
       instructions: this.instructions,
       thankYouScreen: this.thankYouScreen,
       leaveFeedback: this.leaveFeedback,
-      orderNumbers: this.orderNumbers
+      subCategories: this.subCategories,
     };
 
     if (showPopup) {
-      let lang = localStorage.getItem('tt-language');
+      const lang = localStorage.getItem('tt-language');
       if (lang === 'en') {
-        alert("Saved!");
+        alert('Saved!');
       }
       else {
-        alert("Gespeichert!");
+        alert('Gespeichert!');
       }
     }
     if (!this.id) { // new test
@@ -229,7 +228,7 @@ export class CreateCardSortComponent implements OnInit {
         Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
       })
     };
-    //return this.http.post('http://localhost:48792/users/test/add', object,
+    // return this.http.post('http://localhost:48792/users/test/add', object,
     return this.http.post(this.userService.serverUrl + '/users/card-sort-test/add', object, httpOptions);
   }
 
@@ -242,7 +241,7 @@ export class CreateCardSortComponent implements OnInit {
         Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
       })
     };
-    //return this.http.post('http://localhost:48792/users/test/get', id,
+    // return this.http.post('http://localhost:48792/users/test/get', id,
     return this.http.post(this.userService.serverUrl + '/users/card-sort-test/get', id, httpOptions);
   }
 
@@ -254,7 +253,7 @@ export class CreateCardSortComponent implements OnInit {
         Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
       })
     };
-    //return this.http.post('http://localhost:48792/users/test/edit', 
+    // return this.http.post('http://localhost:48792/users/test/edit',
     return this.http.post(this.userService.serverUrl +  '/users/card-sort-test/edit', object, httpOptions);
   }
 

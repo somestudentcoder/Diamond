@@ -272,11 +272,8 @@ async function editCardSortTest(updatedTest) {
             test[0].password = "";
         }
     }
-    if (updatedTest.tree) {
-        test[0].tree = updatedTest.tree;
-    }
-    if (updatedTest.tasks) {
-        test[0].tasks = updatedTest.tasks;
+    if (updatedTest.cards) {
+        test[0].cards = updatedTest.cards;
     }
     if (updatedTest.welcomeMessage) {
         test[0].welcomeMessage = updatedTest.welcomeMessage;
@@ -287,11 +284,8 @@ async function editCardSortTest(updatedTest) {
     if (updatedTest.thankYouScreen) {
         test[0].thankYouScreen = updatedTest.thankYouScreen;
     }
-    if (updatedTest.leafNodes !== undefined) {
-        test[0].leafNodes = updatedTest.leafNodes;
-    }
-    if (updatedTest.orderNumbers !== undefined) {
-        test[0].orderNumbers = updatedTest.orderNumbers;
+    if (updatedTest.subCategories !== undefined) {
+        test[0].subCategories = updatedTest.subCategories;
     }
     if (updatedTest.launched !== undefined) {
         test[0].launched = updatedTest.launched;
