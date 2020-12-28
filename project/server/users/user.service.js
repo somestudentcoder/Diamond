@@ -38,9 +38,11 @@ module.exports = {
 async function getResultsById(id) {
     const result = await Result.find({ "id" : id });
     const test = await Test.find({ "id" : id });
+    const card_sort_test = await CardSortTest.find({ "id" : id });
     const object = {
         result: result,
-        test: test
+        test: test,
+        card_sort_test: card_sort_test,
     }
     return object;
 }
