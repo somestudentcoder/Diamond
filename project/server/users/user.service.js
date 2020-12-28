@@ -179,7 +179,7 @@ async function deleteIndividualResult(resultId) {
 
 async function editTest(updatedTest) {
 
-    const test = await CardSortTest.find({ "id" : updatedTest.id });
+    const test = await Test.find({ "id" : updatedTest.id });
 
     //Object.assign(test, updatedTest);
     if (updatedTest.name) {

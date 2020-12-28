@@ -31,6 +31,7 @@ export class TestsComponent implements OnInit {
     const data = {
         user: JSON.parse(localStorage.getItem('currentUser')).email
     };
+    console.log(data)
     this.getTestData(data)
     .subscribe(
       res => {
