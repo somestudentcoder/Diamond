@@ -2,28 +2,12 @@
     color: lightcoral;
 }
 
-.task {
-    border: 1px solid lightgray;
-    background-color: #f9f9f9;
-}
-
-.tree-disabled {
-    pointer-events: none;
-    opacity: 0.5;
-}
-
-#test-tree {
-    overflow:auto;
-    border:1px solid silver;
-    min-height:100px;
-}
-
 textarea {
     width: 100%;
 }
 
-.selected-task {
-    border-color: deepskyblue;
+.cardName{
+    width: 200px;
 }
 
 .nav-tabs>li.active>a {

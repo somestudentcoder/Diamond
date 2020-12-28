@@ -27,6 +27,9 @@ import { TranslationService } from './translate.service';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CreateCardSortComponent } from './create-card-sort/create-card-sort.component';
 import { CardSortTestComponent } from './card-sort-test/card-sort-test.component';
+import { CardListComponent } from './card-list/card-list.component';
+
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent},
@@ -59,7 +62,8 @@ const appRoutes: Routes = [
     PietreeComponent,
     AdminComponent,
     CreateCardSortComponent,
-    CardSortTestComponent
+    CardSortTestComponent,
+    CardListComponent,
   ],
   imports: [
     HttpClientModule,
@@ -73,7 +77,8 @@ const appRoutes: Routes = [
         useFactory: createTranslateLoader,
         deps: [HttpClient]
       }
-    })
+    }),
+    DragDropModule
   ],
   exports: [RouterModule],
   providers: [
