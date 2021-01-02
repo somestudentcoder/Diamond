@@ -50,6 +50,9 @@ export class CreateCardSortComponent implements OnInit {
       const body = {
         id: this.id
       };
+
+      // console.log('id: ' + this.cardName);
+
       this.testInformation(body)
           .subscribe(
               res => {
@@ -57,6 +60,7 @@ export class CreateCardSortComponent implements OnInit {
                 this.testName = (res as any).name;
                 this.studyPassword = (res as any).password;
                 this.cardName = (res as any).cardName;
+                this.cards = (res as any).cards;
                 this.welcomeMessage = (res as any).welcomeMessage;
                 this.instructions = (res as any).instructions;
                 this.thankYouScreen = (res as any).thankYouScreen;

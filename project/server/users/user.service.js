@@ -153,7 +153,7 @@ async function passwordRequired(studyId) {
 async function testPassword(body) {
 
     const test = await Test.find({ "id" : body.id });
-    if (test && test[0].password == body.password) {
+    if (test && test[0].password === body.password) {
         return test[0];
     }
     return false;
@@ -238,7 +238,7 @@ async function getAllCardSortTests(data) {
 async function cardSortTestPassword(body) {
 
     const test = await CardSortTest.find({ "id" : body.id });
-    if (test && test[0].password == body.password) {
+    if (test && test[0].password === body.password) {
         return test[0];
     }
     return false;
