@@ -1,3 +1,28 @@
-<p>card-sort-test works!</p>
+<div *ngIf="!study" class="text-center">
+    <div *ngIf="password">
+        <div>{{ "enterpassword" | translate }}</div>
+        <input (keyup.enter)="preparePassword()" [(ngModel)]="enterPassword" type="text">
+        <div>
+            <button type="button" class="btn btn-default" (click)="preparePassword()">OK</button>
+        </div>
+    </div>
+</div>
 
 
+<div *ngIf="study">
+    <div *ngIf="intro" class="col-sm-offset-2 col-sm-8">
+        <h3 class="mt-20">{{ "welcome" | translate }}</h3>
+        <p>{{study.welcomeMessage}}</p>
+        <h3 class="mt-20">{{ "instructions" | translate }}</h3>
+        <p style="margin-bottom: 4px;">{{study.instructions}}</p>
+        <div class="mt-50">
+            <p>{{ "yourname" | translate }}</p>
+            <input (keyup.enter)="intro = false" type="text" [(ngModel)]="userName">
+        </div>
+        <button [disabled]="!userName.length" type="button" class="mt-10 btn btn-default" (click)="intro = false">{{ "continue" | translate }}</button>
+    </div>
+
+    <div *ngIf="!intro" class="col-sm-offset-2 col-sm-8">
+        <app-card-list [cards]="cards" ></app-card-list>
+    </div>
+</div>

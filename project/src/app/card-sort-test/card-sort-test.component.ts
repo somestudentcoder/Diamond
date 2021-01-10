@@ -31,6 +31,7 @@ export class CardSortTestComponent implements OnInit {
   userName = "";
   feedback = "";
   feedbackDone = false;
+  cards: string[] = [];
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private userService: UserService) {
@@ -110,6 +111,7 @@ export class CardSortTestComponent implements OnInit {
               } else {
                 this.password = false;
                 this.preparePassword();
+                this.cards = this.study.cards;
               }
             },
             err => {
