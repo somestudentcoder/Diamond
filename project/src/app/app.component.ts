@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
       this.authService.studyAccess = user.study;
     } else {
       this.authService.loggedIn = false;
-      if (!(window.location.href).includes("/test/")) {
+      if (!((window.location.href).includes("/test/") || (window.location.href).includes("/card-sort-test/"))) {
         this.router.navigate(['/login']);
       }
     }

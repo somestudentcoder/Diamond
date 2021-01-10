@@ -13,7 +13,9 @@ function jwt() {
             '/users/register',
             /^\/users\/results\/.*/,
             '/users/test/passwordrequired',
+            '/users/card-sort-test/passwordrequired',
             '/users/test/password',
+            '/users/card-sort-test/password',
             '/users/results/add'
         ]
     });

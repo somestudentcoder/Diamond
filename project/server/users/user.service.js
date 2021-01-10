@@ -11,6 +11,7 @@ module.exports = {
     getResultsById,
     saveResults,
     saveFeedback,
+    
     addTest,
     getTest,
     editTest,
@@ -22,6 +23,7 @@ module.exports = {
     editCardSortTest,
     deleteCardSortTest,
     getAllCardSortTests,
+    
     cardSortTestPassword,
     cardSortPasswordRequired,
 

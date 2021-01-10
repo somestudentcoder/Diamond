@@ -31,7 +31,9 @@ app.use(jwt());
 // api routes
 app.use('/users', require('./server/users/users.controller'));
 app.use('/users', require('./server/users/tests.controller'));
+app.use('/users', require('./server/users/card-sort-tests.controller'));
 app.use('/users', require('./server/users/result.controller'));
+//app.use('/users', require('./server/users/card-sort-result.controller'));
 
 // global error handler
 app.use(errorHandler);
