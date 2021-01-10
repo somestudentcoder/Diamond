@@ -87,10 +87,6 @@ export class CardSortTestComponent implements OnInit {
               console.log(err);
             }
         );
-
-    if (localStorage.getItem('jstree')) {
-      localStorage.removeItem('jstree');
-    }
     const body = {
       id: this.id
     };
@@ -150,7 +146,8 @@ export class CardSortTestComponent implements OnInit {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE'
       })
     };
-    return this.http.post(this.userService.serverUrl + '/users/card-sort-test/passwordrequired', id, httpOptions);
+    let result = this.http.post(this.userService.serverUrl + '/users/card-sort-test/passwordrequired', id, httpOptions);
+    return result;
   }
 
   preparePassword() {
