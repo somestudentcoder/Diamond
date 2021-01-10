@@ -36,6 +36,7 @@ export class UserService {
 
     register(user) {
         //http://localhost:48792
+        user.study = true;
         return this.http.post(this.serverUrl + `/users/register`, user);
     }
 
