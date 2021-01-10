@@ -23,6 +23,7 @@ module.exports = {
     deleteCardSortTest,
     getAllCardSortTests,
     cardSortTestPassword,
+    cardSortPasswordRequired,
 
     authenticate,
     getAll,
@@ -34,6 +35,11 @@ module.exports = {
     testPassword,
     delete: _delete
 };
+
+
+//#######################################
+//########### User Functions ############
+//#######################################
 
 async function getResultsById(id) {
     const result = await Result.find({ "id" : id });
@@ -122,6 +128,12 @@ async function update(userParam) {
 async function _delete(id) {
     await User.findByIdAndRemove(id);
 }
+
+
+//#######################################
+//######### Tree Test Functions #########
+//#######################################
+
 
 async function addTest(testParam) {
     const test = new Test(testParam);
@@ -221,6 +233,27 @@ async function editTest(updatedTest) {
 
     return test[0];
 
+}
+
+
+//#######################################
+//######### Card Sort Functions #########
+//#######################################
+
+
+async function cardSortPasswordRequired(studyId) {
+
+    const test = await CardSortTest.find({ "id" : studyId });
+
+    if (!test[0].launched) {
+        return 'redirect';
+    }
+
+    if (test[0].password && test[0].password.length) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 async function addCardSortTest(testParam) {

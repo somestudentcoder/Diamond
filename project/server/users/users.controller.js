@@ -4,9 +4,18 @@ const userService = require('./user.service');
 const resultService = require('./result.service');
 
 // routes
+
+// User
 router.post('/authenticate', authenticate);
 router.post('/adminregister', adminregister);
 router.post('/register', register);
+router.post('/', getAll);
+router.get('/current', getCurrent);
+router.get('/:id', getById);
+router.put('/:id', update);
+router.post('/:id', _delete);
+
+// Tree Test
 router.post('/test/add', addTest);
 router.post('/test/get', getTest);
 router.post('/test/password', testPassword);
@@ -15,25 +24,86 @@ router.post('/test/edit', editTest);
 router.post('/test/delete', deleteTest);
 router.post('/test/getbyuserid', getAllTests);
 
-router.post('/card-sort-test/add', addCardSortTest);
-router.post('/card-sort-test/get', getCardSortTest);
-router.post('/card-sort-test/password', cardSortTestPassword);
-router.post('/card-sort-test/passwordrequired', passwordRequired);
-router.post('/card-sort-test/edit', editCardSortTest);
-router.post('/card-sort-test/delete', deleteCardSortTest);
-router.post('/card-sort-test/getbyuserid', getAllCardSortTests);
-
-router.post('/', getAll);
-router.get('/current', getCurrent);
-router.get('/:id', getById);
-router.put('/:id', update);
-router.post('/:id', _delete);
 router.post('/results/add', saveResults);
 router.post('/results/feedback', saveFeedback);
 router.post('/results/:id', getResultsById);
 router.post('/result/delete', deleteIndividualResult);
 
+// Card Sort
+router.post('/card-sort-test/add', addCardSortTest);
+router.post('/card-sort-test/get', getCardSortTest);
+router.post('/card-sort-test/password', cardSortTestPassword);
+router.post('/card-sort-test/passwordrequired', cardSortPasswordRequired);
+router.post('/card-sort-test/edit', editCardSortTest);
+router.post('/card-sort-test/delete', deleteCardSortTest);
+router.post('/card-sort-test/getbyuserid', getAllCardSortTests);
+
+//todo: change routes
+router.post('/card-sort-results/add', saveResults);
+router.post('/card-sort-results/feedback', saveFeedback);
+router.post('/card-sort-results/:id', getResultsById);
+router.post('/card-sort-result/delete', deleteIndividualResult);
+
+
+
+
 module.exports = router;
+
+//#######################################
+//########### User Functions ############
+//#######################################
+
+function authenticate(req, res, next) {
+    userService.authenticate(req.body)
+        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Email or password is incorrect' }))
+        .catch(err => next(err));
+}
+
+function adminregister(req, res, next) {
+    userService.create(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function register(req, res, next) {
+    userService.create(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function getAll(req, res, next) {
+    userService.getAll()
+        .then(users => res.json(users))
+        .catch(err => next(err));
+}
+
+function getCurrent(req, res, next) {
+    userService.getById(req.user.sub)
+        .then(user => user ? res.json(user) : res.sendStatus(404))
+        .catch(err => next(err));
+}
+
+function getById(req, res, next) {
+    userService.getById(req.params.id)
+        .then(user => user ? res.json(user) : res.sendStatus(404))
+        .catch(err => next(err));
+}
+
+function update(req, res, next) {
+    userService.update(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function _delete(req, res, next) {
+    userService.delete(req.body.id)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+//#######################################
+//##########Tree Test Functions##########
+//#######################################
 
 function getResultsById(req, res, next) {
     userService.getResultsById(req.params.id)
@@ -101,55 +171,17 @@ function getAllTests(req, res, next) {
         .catch(err => next(err));
 }
 
-function authenticate(req, res, next) {
-    userService.authenticate(req.body)
-        .then(user => user ? res.json(user) : res.status(400).json({ message: 'Email or password is incorrect' }))
+
+//#######################################
+//######### Card Sort Functions #########
+//#######################################
+
+
+function cardSortPasswordRequired(req, res, next) {
+    userService.cardSortPasswordRequired(req.body.id)
+        .then(bool => res.json(bool))
         .catch(err => next(err));
 }
-
-function adminregister(req, res, next) {
-    userService.create(req.body)
-        .then(() => res.json({}))
-        .catch(err => next(err));
-}
-
-function register(req, res, next) {
-    userService.create(req.body)
-        .then(() => res.json({}))
-        .catch(err => next(err));
-}
-
-function getAll(req, res, next) {
-    userService.getAll()
-        .then(users => res.json(users))
-        .catch(err => next(err));
-}
-
-function getCurrent(req, res, next) {
-    userService.getById(req.user.sub)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
-        .catch(err => next(err));
-}
-
-function getById(req, res, next) {
-    userService.getById(req.params.id)
-        .then(user => user ? res.json(user) : res.sendStatus(404))
-        .catch(err => next(err));
-}
-
-function update(req, res, next) {
-    userService.update(req.body)
-        .then(() => res.json({}))
-        .catch(err => next(err));
-}
-
-function _delete(req, res, next) {
-    userService.delete(req.body.id)
-        .then(() => res.json({}))
-        .catch(err => next(err));
-}
-
-
 
 function addCardSortTest(req, res, next) {
     userService.addCardSortTest(req.body)
