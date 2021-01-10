@@ -1,7 +1,7 @@
 <div class="container-fluid mt-50">
   <div class="col-sm-offset-1">
     <p *ngIf="!this.authService.user.study && this.authService.user.email !== 'admin'">{{ "accountnotenabled" | translate }}</p>
-    <h3 *ngIf="tests && tests.length && (this.authService.user.study || this.authService.user.email === 'admin')">{{ "TreeTest Studies" | translate }}</h3>
+    <h3 *ngIf="(this.authService.user.study || this.authService.user.email === 'admin')">{{ "TreeTest Studies" | translate }}</h3>
     
     <div class="row">
       <div class="col-sm-9">
