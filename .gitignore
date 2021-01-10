@@ -1,17 +1,17 @@
 # compiled output
-project/dist
-project/tmp
-project/out-tsc
+dist
+tmp
+out-tsc
 
 # dependencies
-project/node_modules
+node_modules
 
 # profiling files
 chrome-profiler-events.json
 speed-measure-plugin.json
 
 # IDEs and editors
-project/.idea
+.idea
 .project
 .classpath
 .c9/
