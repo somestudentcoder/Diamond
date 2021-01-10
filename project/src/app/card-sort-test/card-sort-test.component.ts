@@ -10,9 +10,9 @@ declare var $: any;
 @Component({
   selector: 'app-card-sort-test',
   templateUrl: './card-sort-test.component.html',
-  styleUrls: ['./card-sort-test.component.css']
+  styleUrls: ['./card-sort-test.component.css', '../app.component.css']
 })
-export class CardSortTestComponent implements OnInit {
+export class CardSortTestComponent implements OnDestroy, OnInit {
   results = [];
   //todo define result structure of card sort test
   result = {
@@ -87,6 +87,7 @@ export class CardSortTestComponent implements OnInit {
               console.log(err);
             }
         );
+  
     const body = {
       id: this.id
     };
@@ -106,8 +107,9 @@ export class CardSortTestComponent implements OnInit {
                 this.password = true;
               } else {
                 this.password = false;
+                console.log("Prepare Password is next.")
                 this.preparePassword();
-                this.cards = this.study.cards;
+                //this.cards = this.study.cards;
               }
             },
             err => {
@@ -146,8 +148,7 @@ export class CardSortTestComponent implements OnInit {
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE'
       })
     };
-    let result = this.http.post(this.userService.serverUrl + '/users/card-sort-test/passwordrequired', id, httpOptions);
-    return result;
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-test/passwordrequired', id, httpOptions);
   }
 
   preparePassword() {

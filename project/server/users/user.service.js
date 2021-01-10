@@ -244,11 +244,9 @@ async function editTest(updatedTest) {
 async function cardSortPasswordRequired(studyId) {
 
     const test = await CardSortTest.find({ "id" : studyId });
-
     if (!test[0].launched) {
         return 'redirect';
     }
-
     if (test[0].password && test[0].password.length) {
         return true;
     } else {

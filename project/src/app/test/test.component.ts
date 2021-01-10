@@ -90,8 +90,6 @@ export class TestComponent implements OnDestroy, OnInit {
       }
     );
 
-
-
     if (localStorage.getItem('jstree')) {
       localStorage.removeItem('jstree');
     }
@@ -276,7 +274,7 @@ export class TestComponent implements OnDestroy, OnInit {
 
   passwordRequired(id) {
     const httpOptions = {
-        headers: new HttpHeaders({
+      headers: new HttpHeaders({
         'Content-Type':  'application/json',
         'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, PATCH, DELETE'
       })
