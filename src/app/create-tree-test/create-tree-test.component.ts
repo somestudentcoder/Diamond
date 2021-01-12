@@ -29,7 +29,7 @@ export class CreateTestComponent implements OnInit {
 
   welcomeMessage = "Welcome to the study. Your answers can help improving the information hierarchy.";
   instructions = "Read the task, and find the appropriate answer in the tree.";
-  thankYouScreen = "Thank you for participation.";
+  thankYouScreen = "Thank you for your participation.";
   leaveFeedback = "Your results are saved. You can write us your feedback (optional).";
 
   leafNodes = true;

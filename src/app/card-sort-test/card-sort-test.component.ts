@@ -18,7 +18,6 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   result = {
     groupName : "",
     cards : [],
-    time : 0
   };
 
 
@@ -27,11 +26,13 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   enterPassword = '';
   study;
   password = true;
+  mindsetDone = false;
   finished = false;
   id = this.route.snapshot.params['id'];
   intro = true;
   userName = "";
   feedback = "";
+  mindset = "";
   feedbackDone = false;
   ungrouped_cards: string[] = [];
 
@@ -120,12 +121,40 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
         );
   }
 
+  finishSorting() {
+    this.finished = true;
+
+    const result = {
+      id: this.id,
+      results: this.results,
+      finished: true,
+      username: this.userName,
+      timestamp: (new Date()).toISOString().slice(0, 19).replace(/-/g, "-").replace("T", " "),
+      feedback: ""
+    };
+
+    this.postCardSortTestData(result)
+        .subscribe(
+            res => {
+              console.log(res);
+            },
+            err => {
+              console.log(err);
+            }
+        );
+  }
+
+  sendMindset(){
+    this.mindsetDone = true;
+  }
+
 
   sendFeedback() {
     const result = {
       username: this.userName,
       feedback: this.feedback
     };
+    console.log(this.feedback);
 
     this.postFeedback(result)
         .subscribe(
