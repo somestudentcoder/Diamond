@@ -28,8 +28,10 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CreateCardSortComponent } from './create-card-sort/create-card-sort.component';
 import { CardSortTestComponent } from './card-sort-test/card-sort-test.component';
 import { CardListComponent } from './card-list/card-list.component';
+import { SortingComponent } from './sorting/sorting.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+
 
 const appRoutes: Routes = [
   { path: 'admin', component: AdminComponent},
@@ -64,6 +66,7 @@ const appRoutes: Routes = [
     CreateCardSortComponent,
     CardSortTestComponent,
     CardListComponent,
+    SortingComponent,
   ],
   imports: [
     HttpClientModule,

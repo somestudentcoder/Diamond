@@ -1,0 +1,33 @@
+<div cdkDropListGroup>
+    
+
+    <div class="mt-10 mb-10">
+        <div class="col-xs-3">
+            <input class="form-control" type="text" [(ngModel)]="groupName" type="text" (keyup.enter)="addGroup()">
+        </div>
+        <button type="button" class="btn btn-default mr-5" (click)="addGroup()">{{ "addgroup" | translate }}</button>
+    </div>
+
+    <div class="col-md-2">
+        <div class="card-box">
+            <h2>Cards</h2>
+            <div cdkDropList [cdkDropListData]="ungrouped_cards" class="group" (cdkDropListDropped)="drop($event)">
+                <div class="card" *ngFor="let card of ungrouped_cards" cdkDrag>{{card}}</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-8">
+        <ng-container *ngFor="let res of results">
+            <div class="col-md-3">
+                <div class="card-box">
+                    <h2>{{res.group_name}}</h2>
+                    <div cdkDropList class="group" [cdkDropListData]="res.group_list" (cdkDropListDropped)="drop($event)">
+                        <div class="card" *ngFor="let card of res.group_list" cdkDrag>{{card}}</div>
+                    </div>
+                </div>
+            </div>
+        </ng-container>
+    </div>
+</div>
+  
