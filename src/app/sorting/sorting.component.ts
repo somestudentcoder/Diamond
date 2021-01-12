@@ -43,6 +43,6 @@ export class SortingComponent{
   }
 
   finish(){
-    this.output.emit(results);
+    this.output.emit(this.results);
   }
 }

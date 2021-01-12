@@ -114,7 +114,6 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   }
 
   finishSorting(results) {
-    return;
     this.finished = true;
 
     const result = {
