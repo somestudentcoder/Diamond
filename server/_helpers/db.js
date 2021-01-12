@@ -15,5 +15,6 @@ module.exports = {
     Test: require('../users/test.model'),
     CardSortTest: require('../users/card-sort-test.model'),
     Result: require('../users/result.model'),
+    CardSortResult: require('../users/card-sort-result.model'),
     database_connection_url
 };

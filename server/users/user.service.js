@@ -5,9 +5,11 @@ const db = require('../_helpers/db');
 const User = db.User;
 const Test = db.Test;
 const Result = db.Result;
+const CardSortResult = db.CardSortResult;
 const CardSortTest = db.CardSortTest;
 
 module.exports = {
+    // Tree Test
     getResultsById,
     saveResults,
     saveFeedback,
@@ -18,23 +20,31 @@ module.exports = {
     deleteTest,
     getAllTests,
 
+    deleteIndividualResult,
+    testPassword,
+    passwordRequired,
+
+    // Card Sort
+    getCardSortResultsById,
+    saveCardSortResults,
+    saveCardSortFeedback,
+
     addCardSortTest,
     getCardSortTest,
     editCardSortTest,
     deleteCardSortTest,
     getAllCardSortTests,
-    
+
+    deleteIndividualCardSortResult,
     cardSortTestPassword,
     cardSortPasswordRequired,
 
+    // User
     authenticate,
     getAll,
     getById,
     create,
     update,
-    passwordRequired,
-    deleteIndividualResult,
-    testPassword,
     delete: _delete
 };
 
@@ -42,35 +52,6 @@ module.exports = {
 //#######################################
 //########### User Functions ############
 //#######################################
-
-async function getResultsById(id) {
-    const result = await Result.find({ "id" : id });
-    const test = await Test.find({ "id" : id });
-    const card_sort_test = await CardSortTest.find({ "id" : id });
-    const object = {
-        result: result,
-        test: test,
-        card_sort_test: card_sort_test,
-    }
-    return object;
-}
-
-async function saveFeedback(resultParam) {
-    const result = await Result.findOne({ username: resultParam.username })
-
-    result.feedback = resultParam.feedback;
-
-    await result.save();
-
-    return result;
-}
-
-
-async function saveResults(resultParam) {
-    const result = new Result(resultParam);
-    // save user
-    await result.save();
-}
 
 async function authenticate({ email, password }) {
     const user = await User.findOne({ email });
@@ -135,6 +116,35 @@ async function _delete(id) {
 //#######################################
 //######### Tree Test Functions #########
 //#######################################
+
+
+async function getResultsById(id) {
+    const result = await Result.find({ "id" : id });
+    const test = await Test.find({ "id" : id });
+    const card_sort_test = await CardSortTest.find({ "id" : id });
+    const object = {
+        result: result,
+        test: test,
+    }
+    return object;
+}
+
+async function saveFeedback(resultParam) {
+    const result = await Result.findOne({ username: resultParam.username })
+
+    result.feedback = resultParam.feedback;
+
+    await result.save();
+
+    return result;
+}
+
+
+async function saveResults(resultParam) {
+    const result = new Result(resultParam);
+    // save user
+    await result.save();
+}
 
 
 async function addTest(testParam) {
@@ -242,6 +252,31 @@ async function editTest(updatedTest) {
 //######### Card Sort Functions #########
 //#######################################
 
+async function getCardSortResultsById(id) {
+    const result = await CardSortResult.find({ "id" : id });
+    const card_sort_test = await CardSortTest.find({ "id" : id });
+    const object = {
+        result: result,
+        card_sort_test: card_sort_test,
+    }
+    return object;
+}
+
+async function saveCardSortFeedback(resultParam) {
+    const result = await CardSortResult.findOne({ username: resultParam.username })
+
+    result.feedback = resultParam.feedback;
+
+    await result.save();
+
+    return result;
+}
+
+async function saveCardSortResults(resultParam) {
+    const result = new CardSortResult(resultParam);
+    // save user
+    await result.save();
+}
 
 async function cardSortPasswordRequired(studyId) {
 
@@ -289,6 +324,11 @@ async function deleteCardSortTest(testId) {
     return 1;
 }
 
+async function deleteIndividualCardSortResult(resultId) {
+    const result = await CardSortResult.find({ "_id" : resultId });
+    await result[0].delete();
+    return 1;
+}
 
 async function editCardSortTest(updatedTest) {
 
