@@ -32,7 +32,7 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   userName = "";
   feedback = "";
   feedbackDone = false;
-  cards: string[] = [];
+  ungrouped_cards: string[] = [];
 
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private router: Router, private userService: UserService) {
@@ -163,7 +163,7 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
                 alert('Wrong password!');
               } else {
                 this.study = res;
-                this.cards = this.study.cards;
+                this.ungrouped_cards = this.study.cards;
               }
             },
             err => {
