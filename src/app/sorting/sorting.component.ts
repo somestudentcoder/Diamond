@@ -10,15 +10,11 @@ export class SortingComponent{
 
   @Input() ungrouped_cards: [string];
 
-  @Output() output = new EventEmitter<[]>();
+  @Output() output = new EventEmitter<any>();
 
   results = [];
 
   groupName = "";
-
-  constructor() {
-    this.results.push({group_name:"One", group_list: ["Two", "Three"]});
-  }
 
   addGroup()
   {
