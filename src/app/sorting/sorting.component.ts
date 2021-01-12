@@ -41,4 +41,8 @@ export class SortingComponent{
                         event.currentIndex);
     }
   }
+
+  finish(){
+    this.output.emit(results);
+  }
 }

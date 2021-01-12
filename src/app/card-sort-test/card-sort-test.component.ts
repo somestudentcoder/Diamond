@@ -13,14 +13,6 @@ declare var $: any;
   styleUrls: ['./card-sort-test.component.css', '../app.component.css']
 })
 export class CardSortTestComponent implements OnDestroy, OnInit {
-  results = [];
-  //todo define result structure of card sort test
-  result = {
-    groupName : "",
-    cards : [],
-  };
-
-
   startTime;
   endTime;
   enterPassword = '';
@@ -59,7 +51,7 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
       //add results in database
       const result = {
         id: this.id,
-        results: this.results,
+        results: null,
         finished: false,
         username: this.userName,
         timestamp: (new Date()).toISOString().slice(0, 19).replace(/-/g, "-").replace("T", " "),
@@ -121,12 +113,13 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
         );
   }
 
-  finishSorting() {
+  finishSorting(results) {
+    return;
     this.finished = true;
 
     const result = {
       id: this.id,
-      results: this.results,
+      results: results,
       finished: true,
       username: this.userName,
       timestamp: (new Date()).toISOString().slice(0, 19).replace(/-/g, "-").replace("T", " "),
