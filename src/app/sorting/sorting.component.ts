@@ -9,8 +9,7 @@ import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag
 export class SortingComponent{
 
   @Input() ungrouped_cards: [string];
-
-  @Output() output = new EventEmitter<any>();
+  @Output() output = new EventEmitter<any[]>();
 
   results = [];
 
