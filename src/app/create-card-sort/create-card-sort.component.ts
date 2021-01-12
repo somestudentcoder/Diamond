@@ -23,7 +23,7 @@ export class CreateCardSortComponent implements OnInit {
 
   welcomeMessage = 'Welcome to this card sorting study!';
   instructions = 'Please group the provided cards as you see fit.';
-  thankYouScreen = 'Thank you for participation.';
+  thankYouScreen = 'Thank you for your participation.';
   leaveFeedback = 'Your results are saved. You can give us your feedback (optional).';
 
   subCategories = true;

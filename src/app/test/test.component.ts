@@ -28,7 +28,7 @@ export class TestComponent implements OnDestroy, OnInit {
   enterPassword = '';
   studyPassword = '';
   study;
-  password = true;
+  password = false;
   finished = false;
   selectedAnswer = false;
   // tslint:disable-next-line:no-string-literal
