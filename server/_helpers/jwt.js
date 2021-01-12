@@ -16,7 +16,9 @@ function jwt() {
             '/users/card-sort-test/passwordrequired',
             '/users/test/password',
             '/users/card-sort-test/password',
-            '/users/results/add'
+            '/users/results/add',
+            '/users/card-sort-results/add'
+
         ]
     });
 }

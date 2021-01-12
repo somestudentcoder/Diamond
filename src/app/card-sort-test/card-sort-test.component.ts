@@ -16,7 +16,9 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   results = [];
   //todo define result structure of card sort test
   result = {
-
+    groupName : "",
+    cards : [],
+    time : 0
   };
 
 
@@ -107,9 +109,7 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
                 this.password = true;
               } else {
                 this.password = false;
-                console.log("Prepare Password is next.")
                 this.preparePassword();
-                //this.cards = this.study.cards;
               }
             },
             err => {
@@ -164,6 +164,7 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
                 alert('Wrong password!');
               } else {
                 this.study = res;
+                this.cards = this.study.cards;
               }
             },
             err => {
