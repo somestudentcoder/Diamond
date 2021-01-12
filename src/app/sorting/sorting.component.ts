@@ -10,7 +10,7 @@ export class SortingComponent{
 
   @Input() ungrouped_cards: [string];
 
-  @Output() output = new EventEmitter<[]>();
+  @Output() output = new EventEmitter<any[]>();
 
   results = [];
 
