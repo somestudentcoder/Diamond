@@ -18,7 +18,6 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
   result = {
     groupName : "",
     cards : [],
-    time : 0
   };
 
 
