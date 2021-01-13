@@ -9,8 +9,12 @@ export class User {
 
 @Injectable()
 export class UserService {
-    serverUrl = "http://localhost:48792"; // local testing
-    //serverUrl = ""; // server
+    // Local
+    serverUrl = 'http://localhost:48792';
+
+    // Heroku
+    // serverUrl = "https://iaweb-test-suite.herokuapp.com";
+
     constructor(private http: HttpClient) { }
 
     getAll() {
