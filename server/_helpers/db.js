@@ -18,3 +18,4 @@ module.exports = {
     CardSortResult: require('../users/card-sort-result.model'),
     database_connection_url
 };
+
