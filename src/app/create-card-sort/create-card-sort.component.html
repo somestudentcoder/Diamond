@@ -23,7 +23,7 @@
                 <p class="mt-20">{{ "studyurl" | translate }}</p>
                 <small>{{ "link" | translate }}</small>
                 <div>
-                    <span style="background-color: lightgray">{{baseurl}}/#/test/{{randomTestId}}</span>
+                    <span style="background-color: lightgray">{{baseurl}}/#/card-sort-test/{{randomTestId}}</span>
                 </div>
                 <div style="margin-top: 10px"><small>* {{ "requiredfield" | translate }}</small></div>
                 <button [disabled]="!testName.length" type="button" class="btn btn-default mt-30" (click)="open('cards'); saveTest();">{{ "nextstep" | translate }}</button>
