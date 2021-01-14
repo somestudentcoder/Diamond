@@ -3,10 +3,10 @@
 // Example for Heroku based MongoDB: "mongodb+srv://root:root@cluster0-wqaum.mongodb.net/test?retryWrites=true&w=majority"
 
 // Local
-// const database_connection_url = "mongodb://localhost:27017/node-mongo-registration-login-api";
+const database_connection_url = "mongodb://localhost:27017/node-mongo-registration-login-api";
 
 // Heroku
-const database_connection_url = "mongodb+srv://admin:admin189m@iaweb-test-suite.kvxk0.mongodb.net/iaweb-test-suite?retryWrites=true&w=majority";
+// const database_connection_url = "mongodb+srv://admin:admin189m@iaweb-test-suite.kvxk0.mongodb.net/iaweb-test-suite?retryWrites=true&w=majority";
 
 const config = require('../config.json');
 const mongoose = require('mongoose');
