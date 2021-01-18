@@ -19,7 +19,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let t of cardSortTests; let i = index;">
-              <td><a [routerLink]="['/results/' + t.id]" class="pointer">{{t.name}}</a></td>
+              <td><a [routerLink]="['/card-sort-results/' + t.id]" class="pointer">{{t.name}}</a></td>
               <td>
                 <input #myInput style="width: 250px; border: 1px solid lightgray; padding-left: 3px; display: inline-block;" type="text" 
                 [ngModel]="getLink(t.id)">
@@ -45,7 +45,7 @@
               </td>
               <td class="text-center">
 
-                <button [routerLink]="['/results/' + t.id]" type="button" class="btn btn-default"> 
+                <button [routerLink]="['/card-sort-results/' + t.id]" type="button" class="btn btn-default">
                   <span style="padding-right: 5px" class="glyphicon glyphicon-book"></span></button>
             </td>
             </tr>

@@ -12,6 +12,7 @@ function jwt() {
             '/users/authenticate',
             '/users/register',
             /^\/users\/results\/.*/,
+            /^\/users\/card-sort-results\/.*/,
             '/users/test/passwordrequired',
             '/users/card-sort-test/passwordrequired',
             '/users/test/password',

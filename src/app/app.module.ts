@@ -19,6 +19,7 @@ import { UserService } from './user.service';
 import { CreateTestComponent } from './create-tree-test/create-tree-test.component';
 import { TestComponent } from './test/test.component';
 import { ResultsComponent } from './results/results.component';
+import { CardSortResultsComponent } from './card-sort-results/card-sort-results.component';
 import { PietreeComponent } from './pietree/pietree.component';
 import { AdminComponent } from './admin/admin.component';
 
@@ -42,6 +43,7 @@ const appRoutes: Routes = [
   { path: 'card-sort-test/:id', component: CardSortTestComponent},
   { path: 'test/:id', component: TestComponent},
   { path: 'results/:id', component: ResultsComponent},
+  { path: 'card-sort-results/:id', component: CardSortResultsComponent},
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'tests', component: TestsComponent},
@@ -61,6 +63,7 @@ const appRoutes: Routes = [
     CreateTestComponent,
     TestComponent,
     ResultsComponent,
+    CardSortResultsComponent,
     PietreeComponent,
     AdminComponent,
     CreateCardSortComponent,
