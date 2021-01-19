@@ -10,10 +10,10 @@ export class User {
 @Injectable()
 export class UserService {
     // Local
-    serverUrl = 'http://localhost:48792';
+    // serverUrl = 'http://localhost:48792';
 
     // Heroku
-    // serverUrl = 'https://iaweb-diamond.herokuapp.com';
+    serverUrl = 'https://iaweb-diamond.herokuapp.com';
 
     constructor(private http: HttpClient) { }
 
