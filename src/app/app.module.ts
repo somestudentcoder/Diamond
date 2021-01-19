@@ -32,6 +32,7 @@ import { CardListComponent } from './card-list/card-list.component';
 import { SortingComponent } from './sorting/sorting.component';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import {ResultMatrixComponent} from "./result-matrix/result-matrix.component";
 
 
 const appRoutes: Routes = [
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
     CreateCardSortComponent,
     CardSortTestComponent,
     CardListComponent,
+    ResultMatrixComponent,
     SortingComponent,
   ],
   imports: [

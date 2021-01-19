@@ -55,7 +55,8 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
         finished: false,
         username: this.userName,
         timestamp: (new Date()).toISOString().slice(0, 19).replace(/-/g, "-").replace("T", " "),
-        feedback: ""
+        feedback: "",
+        mindset: ""
       };
 
       this.postCardSortTestData(result)
@@ -122,7 +123,8 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
       finished: true,
       username: this.userName,
       timestamp: (new Date()).toISOString().slice(0, 19).replace(/-/g, "-").replace("T", " "),
-      feedback: ""
+      feedback: "",
+      mindset: ""
     };
 
     this.postCardSortTestData(result)
@@ -136,8 +138,32 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
         );
   }
 
+  postMindset(object){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':  'application/json'
+      })
+    };
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-results/mindset', object, httpOptions);
+  }
+
   sendMindset(){
-    this.mindsetDone = true;
+    const result = {
+      username: this.userName,
+      mindset: this.mindset
+    };
+
+    this.postMindset(result)
+        .subscribe(
+            res => {
+              console.log(res);
+              this.mindsetDone = true;
+            },
+            err => {
+              this.mindsetDone = true;
+              console.log(err);
+            }
+        );
   }
 
 
@@ -146,7 +172,6 @@ export class CardSortTestComponent implements OnDestroy, OnInit {
       username: this.userName,
       feedback: this.feedback
     };
-    console.log(this.feedback);
 
     this.postFeedback(result)
         .subscribe(

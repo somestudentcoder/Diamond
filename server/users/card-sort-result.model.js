@@ -8,6 +8,7 @@ const cardSortResultSchema = new Schema({
     finished: { type: Boolean, unique: false, required: false },
     username: { type: String, required: true },
     timestamp: { type: String, required: true },
+    mindset: { type: String, required: false},
     feedback: { type: String, required: false },
 });
 

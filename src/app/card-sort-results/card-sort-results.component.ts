@@ -5,13 +5,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { UserService } from '../user.service';
 
-declare var Chart: any;
-import * as d3 from "d3";
-
 declare var $: any;
 
 @Component({
-  selector: 'app-results',
+  selector: 'app-card-sort-results',
   templateUrl: './card-sort-results.component.html',
   styleUrls: ['./card-sort-results.component.css', '../app.component.css']
 })
@@ -35,6 +32,8 @@ export class CardSortResultsComponent implements OnInit {
   totalShortest = 1000000;
   shortestMinutes = 0;
   shortestSeconds = 0;
+
+  showingMatrix = false;
 
   root;
   svg;
@@ -73,7 +72,11 @@ export class CardSortResultsComponent implements OnInit {
   }
 
   showResultMatrix(result){
-
+    this.showingMatrix = true;
+    for (let r of this.results){
+      r['showing'] = false;
+    }
+    result['showing'] = true;
   }
 
   resultsInformation() {
@@ -161,24 +164,6 @@ export class CardSortResultsComponent implements OnInit {
     return Math.floor(totalSeconds);
   }
 
-  getBackgroundColor(taskIndex, treeItemIndex, number, answer) {
-    if (this.test.tasks[taskIndex].id === answer) {
-      return "rgba(161,212,36,0.7)";
-    }
-    var totalNumberOfAnswers = 0;
-    // go through every result
-    for (let i = 0; i < this.results.length; i++) {
-        if (this.results[i].results[taskIndex]) {
-          totalNumberOfAnswers++;
-        }
-    }
-
-    var percentage = (number * 100) / totalNumberOfAnswers;
-    if (percentage >=20) { return "rgba(218,31,71,0.7)"; }
-
-    return "rgba(245,98,0,0.7)";
-  }
-
 
 
   getSvg() {
@@ -208,7 +193,46 @@ export class CardSortResultsComponent implements OnInit {
     //you can download svg file by right click menu.
   }
 
-  exportCSV() {
+  closeResultMatrix(){
+    this.showingMatrix = false;
+    for (let r of this.results){
+      r['showing'] = false;
+    }
+  }
+
+
+  exportSortingData() {
+    let rows = [];
+    for (let i = 0; i < this.results.length; i++) {
+      if (!this.results[i].exclude) {
+        for(let group of this.results[i].results){
+          for(let card of group.group_list){
+            let item = [
+              this.results[i].username,
+              group.group_name,
+              // using substring here because the cards have a newline character as the first character
+              card.substring(1)
+            ]
+            rows.push(item);
+          }
+        }
+      }
+    }
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + rows.map(e => e.join(",")).join("\n");
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "my_data.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "my_data.csv".
+  }
+
+
+  exportUserData() {
     let rows = [];
     for (let i = 0; i < this.results.length; i++) {
       if (!this.results[i].exclude) {
@@ -216,7 +240,8 @@ export class CardSortResultsComponent implements OnInit {
           this.results[i].username, 
           this.results[i].timestamp, 
           this.getDuration(this.results[i]),
-          this.results[i].feedback
+          this.results[i].feedback,
+          this.results[i].mindset
         ]
         rows.push(item);
       }
@@ -273,6 +298,6 @@ export class CardSortResultsComponent implements OnInit {
       })
   };
   //http://localhost:48792
-    return this.http.post(this.userService.serverUrl + '/users/result/delete', {id: this.results[this.deleteParticipantResultIndex]._id}, httpOptions);
+    return this.http.post(this.userService.serverUrl + '/users/card-sort-result/delete', {id: this.results[this.deleteParticipantResultIndex]._id}, httpOptions);
   }
 }

@@ -39,6 +39,7 @@ router.post('/card-sort-test/delete', deleteCardSortTest);
 router.post('/card-sort-test/getbyuserid', getAllCardSortTests);
 
 router.post('/card-sort-results/add', saveCardSortResults);
+router.post('/card-sort-results/mindset', saveCardSortMindset);
 router.post('/card-sort-results/feedback', saveCardSortFeedback);
 router.post('/card-sort-results/:id', getCardSortResultsById);
 router.post('/card-sort-result/delete', deleteIndividualCardSortResult);
@@ -182,6 +183,12 @@ function getCardSortResultsById(req, res, next) {
 
 function saveCardSortResults(req, res, next) {
     userService.saveCardSortResults(req.body)
+        .then(() => res.json({}))
+        .catch(err => next(err));
+}
+
+function saveCardSortMindset(req, res, next){
+    userService.saveCardSortMindset(req.body)
         .then(() => res.json({}))
         .catch(err => next(err));
 }

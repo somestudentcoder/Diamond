@@ -27,6 +27,7 @@ module.exports = {
     // Card Sort
     getCardSortResultsById,
     saveCardSortResults,
+    saveCardSortMindset,
     saveCardSortFeedback,
 
     addCardSortTest,
@@ -260,6 +261,16 @@ async function getCardSortResultsById(id) {
         card_sort_test: card_sort_test,
     }
     return object;
+}
+
+async function saveCardSortMindset(resultParam) {
+    const result = await CardSortResult.findOne({ username: resultParam.username })
+
+    result.mindset = resultParam.mindset;
+
+    await result.save();
+
+    return result;
 }
 
 async function saveCardSortFeedback(resultParam) {
