@@ -40,7 +40,7 @@
                     <label style="font-size: 10px !important; text-transform: initial !important;" for="file" class="btn btn-default">{{ "importcsv" | translate }}</label>
                     <input style="display: none;" type="file" id="file" (change)="onFileSelect($event.target)">
                 </div>
-                <input class="cardName" [(ngModel)]="cardName" type="text" (keyup.enter)="addCard()">
+                <input class="cardName form-control" [(ngModel)]="cardName" type="text" (keyup.enter)="addCard()">
                 <app-card-list [cards]="cards" (selectedEvent)="selectCard($event)"></app-card-list>
                 <button type="button" class="btn btn-default mt-30" (click)="open('messages'); saveTest();">{{ "nextstep" | translate }}</button>
                 <button type="button" class="btn btn-default mt-30" (click)="saveTest(true);">{{ "save" | translate }}</button>
