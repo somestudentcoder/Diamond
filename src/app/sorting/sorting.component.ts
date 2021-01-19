@@ -25,6 +25,20 @@ export class SortingComponent{
     this.groupName = "";
   }
 
+  changeGroupName(target)
+  {
+    this.results[target.id].group_name = target.innerHTML;
+  }
+
+  deleteGroup(target)
+  {
+    if (target.id !== -1) {
+      this.results[target.id].group_list.forEach(card => {
+        this.ungrouped_cards.push(card)
+      });
+        this.results.splice(target.id, 1);
+    }
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
