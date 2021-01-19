@@ -22,10 +22,10 @@
         <button [disabled]="!userName.length" type="button" class="mt-10 btn btn-default" (click)="intro = false">{{ "continue" | translate }}</button>
     </div>
     <div *ngIf="!intro" class="col-sm-offset-1 col-sm-9">
-        <div *ngIf="!finished" class="row mt-30">
+        <div *ngIf="!finished" class="row mt-20">
             <app-sorting [ungrouped_cards]="ungrouped_cards" (output)="finishSorting($event)"></app-sorting>
         </div>
-        <div *ngIf="finished" class="row mt-30">
+        <div *ngIf="finished" >
             <p *ngIf="!mindsetDone" >{{study.thankYouScreen}}</p>
 
             <p *ngIf="!mindsetDone" class="mt-50">{{ "mindset" | translate }}</p>
