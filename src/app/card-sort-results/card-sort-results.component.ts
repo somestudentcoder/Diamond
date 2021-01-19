@@ -163,35 +163,7 @@ export class CardSortResultsComponent implements OnInit {
     }
     return Math.floor(totalSeconds);
   }
-
-
-
-  getSvg() {
-    //get svg element.
-    var svg = document.getElementById("mysvg");
-
-    //get svg source.
-    var serializer = new XMLSerializer();
-    var source = serializer.serializeToString(svg);
-
-    //add name spaces.
-    if(!source.match(/^<svg[^>]+xmlns="http\:\/\/www\.w3\.org\/2000\/svg"/)){
-        source = source.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
-    }
-    if(!source.match(/^<svg[^>]+"http\:\/\/www\.w3\.org\/1999\/xlink"/)){
-        source = source.replace(/^<svg/, '<svg xmlns:xlink="http://www.w3.org/1999/xlink"');
-    }
-
-    //add xml declaration
-    source = '<?xml version="1.0" standalone="no"?>\r\n' + source;
-
-    //convert svg source to URI data scheme.
-    var url = "data:image/svg+xml;charset=utf-8,"+encodeURIComponent(source);
-
-    //set url value to a element's href attribute.
-    (<any>document).getElementById("link").href = url;
-    //you can download svg file by right click menu.
-  }
+  
 
   closeResultMatrix(){
     this.showingMatrix = false;
@@ -203,15 +175,22 @@ export class CardSortResultsComponent implements OnInit {
 
   exportSortingData() {
     let rows = [];
+    let item = [
+        "Username",
+        "Group Name",
+        "Card Name"
+    ]
+    rows.push(item)
     for (let i = 0; i < this.results.length; i++) {
       if (!this.results[i].exclude) {
         for(let group of this.results[i].results){
           for(let card of group.group_list){
+            let card_string = card.replace("\n", "");
             let item = [
               this.results[i].username,
               group.group_name,
               // using substring here because the cards have a newline character as the first character
-              card.substring(1)
+              card_string
             ]
             rows.push(item);
           }
@@ -225,7 +204,7 @@ export class CardSortResultsComponent implements OnInit {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "my_data.csv");
+    link.setAttribute("download", "sorting_data.csv");
     document.body.appendChild(link); // Required for FF
 
     link.click(); // This will download the data file named "my_data.csv".
@@ -234,12 +213,18 @@ export class CardSortResultsComponent implements OnInit {
 
   exportUserData() {
     let rows = [];
+    let item = [
+      "Username",
+      "Timestamp",
+      "Feedback",
+      "Mindset"
+    ]
+    rows.push(item)
     for (let i = 0; i < this.results.length; i++) {
       if (!this.results[i].exclude) {
         let item = [
           this.results[i].username, 
-          this.results[i].timestamp, 
-          this.getDuration(this.results[i]),
+          this.results[i].timestamp,
           this.results[i].feedback,
           this.results[i].mindset
         ]
@@ -253,7 +238,7 @@ export class CardSortResultsComponent implements OnInit {
        var encodedUri = encodeURI(csvContent);
        var link = document.createElement("a");
        link.setAttribute("href", encodedUri);
-       link.setAttribute("download", "my_data.csv");
+       link.setAttribute("download", "user_data.csv");
        document.body.appendChild(link); // Required for FF
        
        link.click(); // This will download the data file named "my_data.csv".
