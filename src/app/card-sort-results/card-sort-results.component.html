@@ -59,7 +59,9 @@
                 <tr>
                   <th>Name</th>
                   <th>{{ "dateandtime" | translate }}</th>
+                  <!--
                   <th>{{ "duration" | translate }} [s]</th>
+                  -->
                   <th>Mindset</th>
                   <th>Feedback</th>
                   <th>{{ "exclude" | translate }}</th>
@@ -72,7 +74,9 @@
                 <tr *ngFor="let result of results; let j = index;">
                   <td>{{result.username}}</td>
                   <td>{{result.timestamp}}</td>
+                  <!--
                   <td class="text-right" style="padding-right: 10px">{{getDuration(result)}}</td>
+                  -->
                   <td>{{result.mindset}}</td>
                   <td>{{result.feedback}}</td>
                   <td class="text-center">
