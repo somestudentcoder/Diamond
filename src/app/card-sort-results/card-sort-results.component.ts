@@ -21,22 +21,9 @@ export class CardSortResultsComponent implements OnInit {
   numberCompleted = 0;
   numberLeft = 0;
 
-  totalSecondsTaken = 0;
-  averageSecondsByUser;
-  averageMinutesByUser = 0;
-
-  totalLongest = 0;
-  longestMinutes = 0;
-  longestSeconds = 0;
-
-  totalShortest = 1000000;
-  shortestMinutes = 0;
-  shortestSeconds = 0;
-
   showingMatrix = false;
 
   root;
-  svg;
   duration = 750;
   i = 0;
   deleteParticipantResultIndex;
@@ -99,55 +86,15 @@ export class CardSortResultsComponent implements OnInit {
   }
 
   prepareResults() {
-    let currentTime = 0;
-
-
     this.numberCompleted = 0;
     this.numberLeft = 0;
-
-    this.totalSecondsTaken = 0;
-    this.averageSecondsByUser;
-    this.averageMinutesByUser = 0;
-
-    this.totalLongest = 0;
-    this.longestMinutes = 0;
-    this.longestSeconds = 0;
-
-    this.totalShortest = 1000000;
-    this.shortestMinutes = 0;
-    this.shortestSeconds = 0;
-
-
 
     for (let i = 0; i < this.results.length; i++) {
       if (!this.results[i].exclude) {
         if (this.results[i].finished) this.numberCompleted++;
         else this.numberLeft++;
-        for (let j = 0; j < this.results[i].results.length; j++) {
-          this.totalSecondsTaken += this.results[i].results[j].time;
-          currentTime += this.results[i].results[j].time;
-        }
-
-        if (this.totalLongest < currentTime) {
-          this.totalLongest = currentTime;
-        }
-
-        if (this.totalShortest > currentTime) {
-          this.totalShortest = currentTime;
-        }
-
-        currentTime = 0;
       }
     }
-
-    this.averageSecondsByUser = Math.floor(this.totalSecondsTaken / this.getIncludeResultNumber());
-    this.totalSecondsTaken = Math.floor(this.totalSecondsTaken);
-
-    this.longestSeconds = Math.floor(this.totalLongest);
-
-    // shortest:
-    this.shortestSeconds = Math.floor(this.totalShortest);
-
   }
 
 
@@ -182,13 +129,14 @@ export class CardSortResultsComponent implements OnInit {
       if (this.results[i].finished) {
         for (let group of this.results[i].results) {
           for (let cardName of group.group_list) {
-            let card_string = cardName.replace("\n", "");
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
 
             cards.push(card_string);
             map.set(card_string, cardIndex);
             cardIndex++;
           }
         }
+        break;
       }
     }
     rows.push(cards)
@@ -197,7 +145,7 @@ export class CardSortResultsComponent implements OnInit {
         let item = new Array<string>(cards.length);
         for(let group of this.results[i].results){
           for (let cardName of group.group_list) {
-            let card_string = cardName.replace("\n", "");
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
             let j = map.get(card_string);
             item[j] = group.group_name;
           }
@@ -207,7 +155,7 @@ export class CardSortResultsComponent implements OnInit {
     }
 
     let csvContent = "data:text/csv;charset=utf-8,"
-        + rows.map(e => e.join(",")).join("\n");
+        + rows.map(e => e.join(",")).join('\n');
 
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
@@ -215,7 +163,7 @@ export class CardSortResultsComponent implements OnInit {
     link.setAttribute("download", "sorting_data.csv");
     document.body.appendChild(link); // Required for FF
 
-    link.click(); // This will download the data file named "my_data.csv".
+    link.click(); // This will download the data file named "sorting_data.csv".
   }
 
 
@@ -233,15 +181,15 @@ export class CardSortResultsComponent implements OnInit {
         let item = [
           this.results[i].username, 
           this.results[i].timestamp,
-          this.results[i].feedback,
-          this.results[i].mindset
+          this.results[i].feedback.replace(/\r?\n|\r/g, " "),
+          this.results[i].mindset.replace(/\r?\n|\r/g, " ")
         ]
         rows.push(item);
       }
     }
   
     let csvContent = "data:text/csv;charset=utf-8," 
-       + rows.map(e => e.join(",")).join("\n");
+       + rows.map(e => e.join(",")).join('\n');
 
        var encodedUri = encodeURI(csvContent);
        var link = document.createElement("a");
@@ -249,13 +197,13 @@ export class CardSortResultsComponent implements OnInit {
        link.setAttribute("download", "user_data.csv");
        document.body.appendChild(link); // Required for FF
        
-       link.click(); // This will download the data file named "my_data.csv".
+       link.click(); // This will download the data file named "user_data.csv".
   }
 
 
   prepareDeleteParticipantResult() {
     console.log("prepared!!");
-    console.log(this.results);
+    console.log(this.deleteParticipantResultIndex);
     this.deleteParticipantResult()
     .subscribe(
       res => {
@@ -266,7 +214,7 @@ export class CardSortResultsComponent implements OnInit {
             for (let i = 0; i < this.results.length; i++) {
               this.results[i]["exclude"] = false;
             }
-            this.test = (<any>res).test;
+            this.test = (<any>res).test[0];
             this.prepareResults();
           },
           err => {
@@ -290,6 +238,7 @@ export class CardSortResultsComponent implements OnInit {
         Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
       })
   };
+
   //http://localhost:48792
     return this.http.post(this.userService.serverUrl + '/users/card-sort-result/delete', {id: this.results[this.deleteParticipantResultIndex]._id}, httpOptions);
   }
