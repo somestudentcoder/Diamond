@@ -21,22 +21,9 @@ export class CardSortResultsComponent implements OnInit {
   numberCompleted = 0;
   numberLeft = 0;
 
-  totalSecondsTaken = 0;
-  averageSecondsByUser;
-  averageMinutesByUser = 0;
-
-  totalLongest = 0;
-  longestMinutes = 0;
-  longestSeconds = 0;
-
-  totalShortest = 1000000;
-  shortestMinutes = 0;
-  shortestSeconds = 0;
-
   showingMatrix = false;
 
   root;
-  svg;
   duration = 750;
   i = 0;
   deleteParticipantResultIndex;
@@ -99,55 +86,15 @@ export class CardSortResultsComponent implements OnInit {
   }
 
   prepareResults() {
-    let currentTime = 0;
-
-
     this.numberCompleted = 0;
     this.numberLeft = 0;
-
-    this.totalSecondsTaken = 0;
-    this.averageSecondsByUser;
-    this.averageMinutesByUser = 0;
-
-    this.totalLongest = 0;
-    this.longestMinutes = 0;
-    this.longestSeconds = 0;
-
-    this.totalShortest = 1000000;
-    this.shortestMinutes = 0;
-    this.shortestSeconds = 0;
-
-
 
     for (let i = 0; i < this.results.length; i++) {
       if (!this.results[i].exclude) {
         if (this.results[i].finished) this.numberCompleted++;
         else this.numberLeft++;
-        for (let j = 0; j < this.results[i].results.length; j++) {
-          this.totalSecondsTaken += this.results[i].results[j].time;
-          currentTime += this.results[i].results[j].time;
-        }
-
-        if (this.totalLongest < currentTime) {
-          this.totalLongest = currentTime;
-        }
-
-        if (this.totalShortest > currentTime) {
-          this.totalShortest = currentTime;
-        }
-
-        currentTime = 0;
       }
     }
-
-    this.averageSecondsByUser = Math.floor(this.totalSecondsTaken / this.getIncludeResultNumber());
-    this.totalSecondsTaken = Math.floor(this.totalSecondsTaken);
-
-    this.longestSeconds = Math.floor(this.totalLongest);
-
-    // shortest:
-    this.shortestSeconds = Math.floor(this.totalShortest);
-
   }
 
 
@@ -234,8 +181,8 @@ export class CardSortResultsComponent implements OnInit {
         let item = [
           this.results[i].username, 
           this.results[i].timestamp,
-          this.results[i].feedback.replace("\n", " "),
-          this.results[i].mindset.replace("\n", " ")
+          this.results[i].feedback.replace(/\r?\n|\r/g, " "),
+          this.results[i].mindset.replace(/\r?\n|\r/g, " ")
         ]
         rows.push(item);
       }
