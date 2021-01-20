@@ -179,7 +179,7 @@ export class CardSortResultsComponent implements OnInit {
     let map = new Map();
     let cardIndex = 0;
     for (let i = 0; i < this.results.length; i++) {
-      if (!this.results[i].exclude && this.results[i].finished) {
+      if (this.results[i].finished) {
         for (let group of this.results[i].results) {
           for (let cardName of group.group_list) {
             let card_string = cardName.replace("\n", "");
@@ -266,7 +266,7 @@ export class CardSortResultsComponent implements OnInit {
             for (let i = 0; i < this.results.length; i++) {
               this.results[i]["exclude"] = false;
             }
-            this.test = (<any>res).test[0];
+            this.test = (<any>res).test;
             this.prepareResults();
           },
           err => {
