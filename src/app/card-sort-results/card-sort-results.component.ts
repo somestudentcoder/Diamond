@@ -189,6 +189,7 @@ export class CardSortResultsComponent implements OnInit {
             cardIndex++;
           }
         }
+        break;
       }
     }
     rows.push(cards)
@@ -233,8 +234,8 @@ export class CardSortResultsComponent implements OnInit {
         let item = [
           this.results[i].username, 
           this.results[i].timestamp,
-          this.results[i].feedback,
-          this.results[i].mindset
+          this.results[i].feedback.replace("\n", " "),
+          this.results[i].mindset.replace("\n", " ")
         ]
         rows.push(item);
       }
@@ -255,7 +256,7 @@ export class CardSortResultsComponent implements OnInit {
 
   prepareDeleteParticipantResult() {
     console.log("prepared!!");
-    console.log(this.results);
+    console.log(this.deleteParticipantResultIndex);
     this.deleteParticipantResult()
     .subscribe(
       res => {
@@ -266,7 +267,7 @@ export class CardSortResultsComponent implements OnInit {
             for (let i = 0; i < this.results.length; i++) {
               this.results[i]["exclude"] = false;
             }
-            this.test = (<any>res).test;
+            this.test = (<any>res).test[0];
             this.prepareResults();
           },
           err => {
@@ -290,6 +291,7 @@ export class CardSortResultsComponent implements OnInit {
         Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
       })
   };
+
   //http://localhost:48792
     return this.http.post(this.userService.serverUrl + '/users/card-sort-result/delete', {id: this.results[this.deleteParticipantResultIndex]._id}, httpOptions);
   }
