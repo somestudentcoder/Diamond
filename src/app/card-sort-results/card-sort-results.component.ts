@@ -175,26 +175,34 @@ export class CardSortResultsComponent implements OnInit {
 
   exportSortingData() {
     let rows = [];
-    let item = [
-        "Username",
-        "Group Name",
-        "Card Name"
-    ]
-    rows.push(item)
+    let cards = [];
+    let map = new Map();
+    let cardIndex = 0;
     for (let i = 0; i < this.results.length; i++) {
-      if (!this.results[i].exclude) {
-        for(let group of this.results[i].results){
-          for(let card of group.group_list){
-            let card_string = card.replace("\n", "");
-            let item = [
-              this.results[i].username,
-              group.group_name,
-              // using substring here because the cards have a newline character as the first character
-              card_string
-            ]
-            rows.push(item);
+      if (!this.results[i].exclude && this.results[i].finished) {
+        for (let group of this.results[i].results) {
+          for (let cardName of group.group_list) {
+            let card_string = cardName.replace("\n", "");
+
+            cards.push(card_string);
+            map.set(card_string, cardIndex);
+            cardIndex++;
           }
         }
+      }
+    }
+    rows.push(cards)
+    for (let i = 0; i < this.results.length; i++) {
+      if (!this.results[i].exclude) {
+        let item = new Array<string>(cards.length);
+        for(let group of this.results[i].results){
+          for (let cardName of group.group_list) {
+            let card_string = cardName.replace("\n", "");
+            let j = map.get(card_string);
+            item[j] = group.group_name;
+          }
+        }
+        rows.push(item);
       }
     }
 
