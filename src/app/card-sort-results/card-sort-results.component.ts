@@ -182,7 +182,7 @@ export class CardSortResultsComponent implements OnInit {
       if (this.results[i].finished) {
         for (let group of this.results[i].results) {
           for (let cardName of group.group_list) {
-            let card_string = cardName.replace("\n", "");
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
 
             cards.push(card_string);
             map.set(card_string, cardIndex);
@@ -198,7 +198,7 @@ export class CardSortResultsComponent implements OnInit {
         let item = new Array<string>(cards.length);
         for(let group of this.results[i].results){
           for (let cardName of group.group_list) {
-            let card_string = cardName.replace("\n", "");
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
             let j = map.get(card_string);
             item[j] = group.group_name;
           }
@@ -208,7 +208,7 @@ export class CardSortResultsComponent implements OnInit {
     }
 
     let csvContent = "data:text/csv;charset=utf-8,"
-        + rows.map(e => e.join(",")).join("\n");
+        + rows.map(e => e.join(",")).join('\n');
 
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
@@ -216,7 +216,7 @@ export class CardSortResultsComponent implements OnInit {
     link.setAttribute("download", "sorting_data.csv");
     document.body.appendChild(link); // Required for FF
 
-    link.click(); // This will download the data file named "my_data.csv".
+    link.click(); // This will download the data file named "sorting_data.csv".
   }
 
 
@@ -242,7 +242,7 @@ export class CardSortResultsComponent implements OnInit {
     }
   
     let csvContent = "data:text/csv;charset=utf-8," 
-       + rows.map(e => e.join(",")).join("\n");
+       + rows.map(e => e.join(",")).join('\n');
 
        var encodedUri = encodeURI(csvContent);
        var link = document.createElement("a");
@@ -250,7 +250,7 @@ export class CardSortResultsComponent implements OnInit {
        link.setAttribute("download", "user_data.csv");
        document.body.appendChild(link); // Required for FF
        
-       link.click(); // This will download the data file named "my_data.csv".
+       link.click(); // This will download the data file named "user_data.csv".
   }
 
 
