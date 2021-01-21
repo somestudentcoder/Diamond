@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import * as UserPaths from '../../server/user-paths.js';
 
 export class User {
     id: number;
@@ -9,11 +10,8 @@ export class User {
 
 @Injectable()
 export class UserService {
-    // Local
-    // serverUrl = 'http://localhost:48792';
 
-    // Heroku
-    serverUrl = 'https://iaweb-diamond.herokuapp.com';
+    serverUrl = UserPaths.server_url;
 
     constructor(private http: HttpClient) { }
 
@@ -25,21 +23,21 @@ export class UserService {
             Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
           })
       };
-      //http://localhost:48792
+      // http://localhost:48792
         return this.http.post(this.serverUrl + '/users', {}, httpOptions);
 
 
-        //http://localhost:48792
-        //return this.http.get<User[]>(this.serverUrl + `/users`);
+        // http://localhost:48792
+        // return this.http.get<User[]>(this.serverUrl + `/users`);
     }
 
     getById(id: number) {
-        //http://localhost:48792
+        // http://localhost:48792
         return this.http.get(this.serverUrl + `/users/` + id);
     }
 
     register(user) {
-        //http://localhost:48792
+        // http://localhost:48792
         user.study = true;
         return this.http.post(this.serverUrl + `/users/register`, user);
     }
@@ -52,12 +50,12 @@ export class UserService {
             Authorization: 'Bearer ' + (JSON.parse(localStorage.getItem('currentUser'))).token
           })
       };
-        //http://localhost:48792
+        // http://localhost:48792
         return this.http.put(this.serverUrl + `/users/` + user.email, user, httpOptions);
     }
 
     delete(id: number) {
-        //http://localhost:48792
+        // http://localhost:48792
         return this.http.delete(`/users/` + id);
     }
 }
