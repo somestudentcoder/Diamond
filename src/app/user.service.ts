@@ -11,8 +11,8 @@ export class User {
 @Injectable()
 export class UserService {
 
-    //serverUrl = UserPaths.server_url;
-    serverUrl = 'https://iaweb-diamond.herokuapp.com';
+    serverUrl = UserPaths.server_url;
+    // serverUrl = 'https://iaweb-diamond.herokuapp.com';
 
     constructor(private http: HttpClient) { }
 

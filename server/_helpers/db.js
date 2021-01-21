@@ -6,9 +6,9 @@ const config = require('../config.json');
 const mongoose = require('mongoose');
 const UserPaths = require('../user-paths.js');
 
-//const database_connection_url = UserPaths.db_connection_url;
+const database_connection_url = UserPaths.db_connection_url;
 
-const database_connection_url = "mongodb+srv://admin:admin189m@iaweb-test-suite.kvxk0.mongodb.net/iaweb-test-suite?retryWrites=true&w=majority";
+//const database_connection_url = "mongodb+srv://admin:admin189m@iaweb-test-suite.kvxk0.mongodb.net/iaweb-test-suite?retryWrites=true&w=majority";
 
 
 mongoose.connect(database_connection_url || database_connection_url, { useCreateIndex: true, useNewUrlParser: true, useUnifiedTopology: true});
