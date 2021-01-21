@@ -12,7 +12,6 @@ export class User {
 export class UserService {
 
     serverUrl = UserPaths.server_url;
-    // serverUrl = 'https://iaweb-diamond.herokuapp.com';
 
     constructor(private http: HttpClient) { }
 
