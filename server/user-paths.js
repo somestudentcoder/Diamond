@@ -1,6 +1,6 @@
 /* Use this file to configure your server URL and your database connection URL.
 You have the opportunity to choose the path for local or heroku deployment.
-Just uncomment the 2 lines you prefer for the next built. */
+Just uncomment the 2 lines you prefer for the next build. */
 
 const UserPaths = {
 
