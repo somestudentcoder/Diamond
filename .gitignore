@@ -1,3 +1,6 @@
+# report data not needed on heroku
+report/*
+
 # compiled output
 dist
 tmp

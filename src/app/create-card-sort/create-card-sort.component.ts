@@ -23,6 +23,7 @@ export class CreateCardSortComponent implements OnInit {
 
   welcomeMessage = 'Welcome to this card sorting study!';
   instructions = 'Please group the provided cards as you see fit.';
+  explanation = 'Please explain how you decided on the way the cards should be sorted.';
   thankYouScreen = 'Thank you for your participation.';
   leaveFeedback = 'Your results are saved. You can give us your feedback (optional).';
 
@@ -39,7 +40,7 @@ export class CreateCardSortComponent implements OnInit {
   csvContent;
   baseurl = '';
 
-  itemsFinal;
+  //itemsFinal;
 
   constructor(private http: HttpClient, private route: ActivatedRoute, private userService: UserService) { }
 
@@ -63,6 +64,7 @@ export class CreateCardSortComponent implements OnInit {
                 this.cards = (res as any).cards;
                 this.welcomeMessage = (res as any).welcomeMessage;
                 this.instructions = (res as any).instructions;
+                this.explanation = (res as any).explanation;
                 this.thankYouScreen = (res as any).thankYouScreen;
                 this.leaveFeedback = (res as any).leaveFeedback;
                 if ((res as any).subCategories !== undefined) {
@@ -186,6 +188,7 @@ export class CreateCardSortComponent implements OnInit {
       user: JSON.parse(localStorage.getItem('currentUser')).email,
       welcomeMessage: this.welcomeMessage,
       instructions: this.instructions,
+      explanation: this.explanation,
       thankYouScreen: this.thankYouScreen,
       leaveFeedback: this.leaveFeedback,
       subCategories: this.subCategories,

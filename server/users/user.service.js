@@ -365,6 +365,9 @@ async function editCardSortTest(updatedTest) {
     if (updatedTest.instructions) {
         test[0].instructions = updatedTest.instructions;
     }
+    if (updatedTest.explanation) {
+        test[0].explanation = updatedTest.explanation;
+    }
     if (updatedTest.thankYouScreen) {
         test[0].thankYouScreen = updatedTest.thankYouScreen;
     }
