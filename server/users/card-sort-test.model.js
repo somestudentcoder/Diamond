@@ -11,6 +11,7 @@ const cardSortTestSchema = new Schema({
     user: { type: String, unique: false, required: true },
     welcomeMessage: { type: String, unique: false, required: false },
     instructions: { type: String, unique: false, required: false },
+    explanation: { type: String, unique: false, required: false },
     thankYouScreen: { type: String, unique: false, required: false },
     leaveFeedback: { type: String, unique: false, required: false },
     subCategories: { type: Boolean, unique: false, required: false },

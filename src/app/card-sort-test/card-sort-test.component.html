@@ -28,10 +28,10 @@
         <div *ngIf="finished" >
             <p *ngIf="!mindsetDone" >{{study.thankYouScreen}}</p>
 
-            <p *ngIf="!mindsetDone" class="mt-50">{{ "mindset" | translate }}</p>
+            <p *ngIf="!mindsetDone" class="mt-50">{{ study.explanation }}</p>
             <textarea *ngIf="!mindsetDone" [(ngModel)]="mindset" class="mt-10" cols="53" rows="4"></textarea>
             <div *ngIf="!mindsetDone">
-                <button type="button" class="mt-10 btn btn-default" (click)="sendMindset()">{{ "sendmindset" | translate }}</button>
+                <button type="button" class="mt-10 btn btn-default" (click)="sendMindset()">{{ "sendexplanation" | translate }}</button>
             </div>
 
             <p *ngIf="!feedbackDone && mindsetDone" class="mt-50">{{study.leaveFeedback}}</p>

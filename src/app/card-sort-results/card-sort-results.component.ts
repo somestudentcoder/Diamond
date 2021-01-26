@@ -173,7 +173,7 @@ export class CardSortResultsComponent implements OnInit {
       "Username",
       "Timestamp",
       "Feedback",
-      "Mindset"
+      "Explanation"
     ]
     rows.push(item)
     for (let i = 0; i < this.results.length; i++) {
