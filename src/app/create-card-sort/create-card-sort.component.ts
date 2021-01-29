@@ -121,6 +121,9 @@ export class CreateCardSortComponent implements OnInit {
         if (allCards.length <= 1) {
           allCards = (csv as any).split(';');
         }
+        if (allCards.length <= 1) {
+          allCards = (csv as any).split(/\r?\n|\r/g);
+        }
 
         allCards.forEach(card => {
           if (card == '')
