@@ -48,8 +48,11 @@
           <div *ngIf="!showingMatrix">
 
             <p>{{ "excludedparticipants" | translate }}</p>
+            <button type="button" class="btn btn-warning"  (click)="exportUserDataTransposed()">{{ "exportuserdatatransposed" | translate }}</button>
 
             <button type="button" class="btn btn-warning"  (click)="exportUserData()">{{ "exportuserdata" | translate }}</button>
+
+            <button type="button" class="btn btn-warning"  (click)="exportSortingDataTransposed()">{{ "exportsortingdatatransposed" | translate }}</button>
 
             <button type="button" class="btn btn-warning"  (click)="exportSortingData()">{{ "exportsortingdata" | translate }}</button>
 

@@ -160,7 +160,56 @@ export class CardSortResultsComponent implements OnInit {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "sorting_data.csv");
+    link.setAttribute("download", "sorts_columns.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "sorting_data.csv".
+  }
+
+  exportSortingDataTransposed(){
+    let rows = [];
+    let cards = [];
+    let map = new Map();
+    let cardIndex = 0;
+    for (let i = 0; i < this.results.length; i++) {
+      if (this.results[i].finished) {
+        for (let group of this.results[i].results) {
+          for (let cardName of group.group_list) {
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
+
+            cards.push(card_string);
+            map.set(card_string, cardIndex);
+            cardIndex++;
+          }
+        }
+        break;
+      }
+    }
+    rows.push(cards)
+    for (let i = 0; i < this.results.length; i++) {
+      if (!this.results[i].exclude) {
+        let item = new Array<string>(cards.length);
+        for(let group of this.results[i].results){
+          for (let cardName of group.group_list) {
+            let card_string = cardName.replace(/\r?\n|\r/g, '');
+            let j = map.get(card_string);
+            item[j] = group.group_name;
+          }
+        }
+        rows.push(item);
+      }
+    }
+
+    //transpose
+    rows = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]));
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + rows.map(e => e.join(",")).join('\n');
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "sorts_rows.csv");
     document.body.appendChild(link); // Required for FF
 
     link.click(); // This will download the data file named "sorting_data.csv".
@@ -172,8 +221,8 @@ export class CardSortResultsComponent implements OnInit {
     let item = [
       "Username",
       "Timestamp",
-      "Feedback",
-      "Explanation"
+      "Explanation",
+      "Feedback"
     ]
     rows.push(item)
     for (let i = 0; i < this.results.length; i++) {
@@ -194,10 +243,47 @@ export class CardSortResultsComponent implements OnInit {
        var encodedUri = encodeURI(csvContent);
        var link = document.createElement("a");
        link.setAttribute("href", encodedUri);
-       link.setAttribute("download", "user_data.csv");
+       link.setAttribute("download", "users_columns.csv");
        document.body.appendChild(link); // Required for FF
        
        link.click(); // This will download the data file named "user_data.csv".
+  }
+
+
+  exportUserDataTransposed(){
+    let rows = [];
+    let item = [
+      "Username",
+      "Timestamp",
+      "Explanation",
+      "Feedback"
+    ]
+    rows.push(item)
+    for (let i = 0; i < this.results.length; i++) {
+      if (!this.results[i].exclude) {
+        let item = [
+          this.results[i].username,
+          this.results[i].timestamp,
+          this.results[i].feedback.replace(/\r?\n|\r/g, " "),
+          this.results[i].mindset.replace(/\r?\n|\r/g, " ")
+        ]
+        rows.push(item);
+      }
+    }
+
+    //transpose
+    rows = rows[0].map((_, colIndex) => rows.map(row => row[colIndex]));
+
+    let csvContent = "data:text/csv;charset=utf-8,"
+        + rows.map(e => e.join(",")).join('\n');
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", "users_rows.csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "user_data.csv".
   }
 
 
