@@ -160,10 +160,10 @@ export class CardSortResultsComponent implements OnInit {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "sorts_columns.csv");
+    link.setAttribute("download", "sorts-as-rows.csv");
     document.body.appendChild(link); // Required for FF
 
-    link.click(); // This will download the data file named "sorting_data.csv".
+    link.click(); // This will download the data file
   }
 
   exportSortingDataTransposed(){
@@ -209,10 +209,10 @@ export class CardSortResultsComponent implements OnInit {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "sorts_rows.csv");
+    link.setAttribute("download", "sorts-as-columns.csv");
     document.body.appendChild(link); // Required for FF
 
-    link.click(); // This will download the data file named "sorting_data.csv".
+    link.click(); // This will download the data file
   }
 
 
@@ -243,10 +243,10 @@ export class CardSortResultsComponent implements OnInit {
        var encodedUri = encodeURI(csvContent);
        var link = document.createElement("a");
        link.setAttribute("href", encodedUri);
-       link.setAttribute("download", "users_columns.csv");
+       link.setAttribute("download", "users-as-rows.csv");
        document.body.appendChild(link); // Required for FF
        
-       link.click(); // This will download the data file named "user_data.csv".
+       link.click(); // This will download the data file
   }
 
 
@@ -280,10 +280,10 @@ export class CardSortResultsComponent implements OnInit {
     var encodedUri = encodeURI(csvContent);
     var link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", "users_rows.csv");
+    link.setAttribute("download", "users-as-columns.csv");
     document.body.appendChild(link); // Required for FF
 
-    link.click(); // This will download the data file named "user_data.csv".
+    link.click(); // This will download the data file
   }
 
 
