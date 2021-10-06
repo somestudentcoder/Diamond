@@ -52,7 +52,7 @@ For example:
 - ```db_connection_url: 'mongodb+srv://root:root@cluster0-wqaum.mongodb.net/test?retryWrites=true&w=majority',```
 
 
-Deploying Diamond can be automated using a [Heroku CLI
+Deploying Diamond can be automated using the [Heroku CLI
 tool](https://devcenter.heroku.com/articles/heroku-cli).
 
 
